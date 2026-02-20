@@ -67,4 +67,36 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    /**
+     * Get the categories created by this user.
+     */
+    public function createdCategories()
+    {
+        return $this->hasMany(Category::class, 'created_by');
+    }
+
+    /**
+     * Get the quizzes created by this user.
+     */
+    public function createdQuizzes()
+    {
+        return $this->hasMany(Quiz::class, 'created_by');
+    }
+
+    /**
+     * Get the quiz attempts for this user.
+     */
+    public function quizAttempts()
+    {
+        return $this->hasMany(QuizAttempt::class);
+    }
+
+    /**
+     * Get the leaderboard entries for this user.
+     */
+    public function leaderboard()
+    {
+        return $this->hasMany(Leaderboard::class);
+    }
 }
