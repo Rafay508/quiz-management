@@ -94,13 +94,6 @@
                                     @endif
                                 </div>
                                 <div class="mb-3">
-                                    <label for="selectpickerBasic" class="form-label">Show banner on website</label>
-                                    <select id="selectpickerBasic" name="is_show_banner" class="selectpicker w-100" data-style="btn-default">
-                                        <option value="1" {{ matchSelected(old('is_show_banner', $records->is_show_banner), '1') }}>Yes</option>
-                                        <option value="0" {{ matchSelected(old('is_show_banner', $records->is_show_banner), '0') }}>No</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
                                     <label class="form-label" for="basic-default-home_banner">Home Banner</label>
                                     <input type="hidden" name="previous_home_banner" value="{{ $records->home_banner }}" />
                                     <input type="file" name="home_banner" class="form-control">
@@ -181,14 +174,6 @@
                                         class="form-control"
                                         placeholder="Header Script"
                                         name="header_script" maxlength="65000" rows="5">{{ old('header_script', $records->header_script) }}</textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-label" for="basic-default-body_script">Body Script</label>
-                                    <textarea
-                                        id="basic-default-body_script"
-                                        class="form-control"
-                                        placeholder="Body Script"
-                                        name="body_script" maxlength="65000" rows="5">{{ old('body_script', $records->body_script) }}</textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="basic-default-privacy_policy">Privacy Policy</label>
