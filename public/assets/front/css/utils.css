@@ -1,0 +1,55 @@
+/*utils*/
+.bg-black{
+    background-color: black;
+}
+
+.bg-theme{
+    background-color: #4958EF;
+    color: #fff;
+}
+
+.btn-custom {
+    background-color: #4958EF;
+    color: #fff;
+}
+
+.nav-link.active{
+    background-color: #5753d9;
+    color: #fff;
+}
+
+.nav-link:hover{
+    background-color: #5753d9;
+    color: #fff;
+}
+
+.btn-custom:hover {
+    background-color: #5753d9;
+    color: #fff;
+}
+
+.accent-color{
+    accent-color: #e4e4e4;
+}
+
+.text-custom{
+    color:#5753d9;
+}
+
+.form-placeholder{
+    font-size: 0.90rem;
+}
+
+.vertical-card{
+    font-size: 0.65rem;
+}
+
+.btn-price{
+    font-size: 0.85rem;
+    color: black;
+}
+
+.btn-price:hover{
+    background-color: #dc3545;
+    color: white;
+}

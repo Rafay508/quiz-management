@@ -1,0 +1,36 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreBrandRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'required|unique:brands,name|max:255',
+            'slug' => 'required|unique:brands,slug|max:255|regex:/^[a-zA-Z0-9-]+$/',
+            'meta_title' => 'nullable|max:255',
+            'meta_keywords' => 'nullable|max:65535',
+            'meta_description' => 'nullable|max:65535',
+            'image' => 'required|image',
+            'is_show' => 'required',
+        ];
+    }
+}

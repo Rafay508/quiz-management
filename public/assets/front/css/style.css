@@ -1,0 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;  
+}
+
+body{
+    overflow-x: hidden;
+}
+
+    .nav-shadow {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    #tabsContainer {
+    max-height: 500px;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+    background-color: white; /* Ensure the background is not transparent */
+    border: 1px solid #ddd; /* Optional: Add border for clarity */
+}
+
+.my-tabs .nav-link {
+    border: none; /* Remove all borders */
+    border-bottom: 2px solid transparent; /* Add bottom border */
+    padding: 0.5rem 1rem; /* Adjust padding as needed */
+    margin: 0; /* Ensure there's no margin */
+    background-color: transparent; /* Remove background color */
+    color: #495057; /* Default text color for inactive tabs */
+}
+
+/* Ensure spacing and alignment */
+.my-tabs .nav-item {
+    margin: 0;
+}
+
+.my-tabs .nav-link.active{
+    border-bottom: 2px solid #87a8de; /* Example: active tab bottom border color */
+    color: #3b71ca; /* Example: text color for the active tab */
+    background-color: transparent; /* Ensure the background is transparent */
+}
+
+
+    #searchInput:focus {
+    outline: none; /* Removes the default focus ring */
+    box-shadow: none; /* Removes any shadow that might be added by Bootstrap */
+    border-color: transparent; /* Removes the border color on focus */
+
+}
+
+.bg-light-2{
+background: rgba(251, 251, 251, 0.5);
+}
+
+
+    /* .black-60{
+        color: #333;
+    } */
+
+    .tech-h {
+        height: 9rem;
+    }
+
+    .font-sm {
+        font-size: 0.75rem;
+    }
+
+    .footer-link-size {
+        font-size: 0.80rem;
+    }
+
+    /* Over Riding CSS Card Shadow Property */
+    .card-shadow {
+        cursor: pointer;
+    }
+
+    .card-shadow:hover {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    
+    .custom-slider-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.custom-slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.custom-slider-item {
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+
+@media (min-width: 768px) {
+    .custom-slider-item {
+        width: calc(100% / 4.5); /* 4.5 items per slide on larger screens */
+    }
+}
+
+@media (max-width: 767px) {
+    .custom-slider-item {
+        width: calc(100% / 2); /* 2 items per slide on mobile screens */
+    }
+}
+
+.custom-slider-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.custom-slider-control-prev {
+    left: 10px;
+    box-shadow: 0 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-slider-control-next {
+    right: 10px;
+    box-shadow: 0 1px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.bg-custom{
+    background: rgb(255,255,255);
+background: linear-gradient(92deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(177, 184, 255, 0.20) 100%);
+}
+
+@media (max-width: 768px) {
+  /* Remove shadow for elements on mobile screens */
+  .margin{
+    margin-top: 15vh !important;
+  }
+  .sign{
+    box-shadow: none !important;
+  }
+
+  .offcanvas {
+    width: 80vw !important;
+  }
+
+  .sign-btn{
+    width:125px !important;
+  }
+}
+
+/*One Time Use*/
+.sign-in-image { 
+    background:url(/assets/front/images/signinimage.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: repeat;
+}
+
+.sign-up-image { 
+    background:url(/assets/front/images/signupimage.png);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: repeat;
+}
+/*Price Slider*/
+
+  #suggestions {
+    max-height: 500px;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
+.suggestion-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.suggestion-item:hover img {
+    transform: scale(1.1);
+}

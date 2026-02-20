@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Allow: /sitemap.rss/
+Sitemap: https://softliee.com/sitemap.xml
