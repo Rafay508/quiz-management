@@ -26,7 +26,7 @@ class CreateQuizzesTable extends Migration
             $table->boolean('shuffle_questions')->default(false);
             $table->boolean('show_result_immediately')->default(false);
             $table->boolean('is_published')->default(false);
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
             $table->text('instructions')->nullable();
             $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
             $table->timestamps();

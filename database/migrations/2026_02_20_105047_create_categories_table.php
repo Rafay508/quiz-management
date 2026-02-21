@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('status')->default('active');
-            $table->foreignId('created_by')->constrained('users')->onDelete('cascade');
+            $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
             $table->timestamps();
         });
     }

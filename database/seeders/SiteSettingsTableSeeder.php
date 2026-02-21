@@ -21,14 +21,14 @@ class SiteSettingsTableSeeder extends Seeder
         if (!$settingsCount) {
 
             \DB::table('site_settings')->insert([
-                'site_title'            => 'Softliee.com',
-                'contact_email'         => 'info@softliee.com',
+                'site_title'            => 'QuizMaster',
+                'contact_email'         => 'info@quizmaster.com',
                 'facebook'              => 'https://www.facebook.com/',
                 'youtube'               => 'https://www.youtube.com/',
                 'linkedin'              => 'https://www.linkedin.com/',
                 'pinterest'             => 'https://www.pinterest.com/',
-                'footer_sentence'       => 'Softliee is an online mobile phone website where you can discover the latest and updated mobile prices in Pakistan. Softliee`s team provides detailed features and specifications along with mobile prices in Pakistan.',
-                'copyright'             => 'Softliee Pakistan © 2024 All Rights Reserved Softliee.com',
+                'footer_sentence'       => 'QuizMaster is an online quiz management platform where you can create, manage, and participate in quizzes easily. Our team provides powerful tools for quiz creation, real-time results, and detailed performance analytics.',
+                'copyright'             => 'QuizMaster © 2026 All Rights Reserved.',
                 'google_adsense_script' => '',
                 'logo'                  => '',
                 'favicon'               => '',

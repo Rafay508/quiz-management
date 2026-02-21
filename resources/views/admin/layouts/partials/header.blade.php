@@ -63,6 +63,14 @@
             </a>
         </li>
 
+        <!-- Categories -->
+        <li class="menu-item {{ request()->segment(2) == 'categories' ? 'active' : '' }}">
+            <a href="{{ route('admin.categories.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-category"></i>
+                <div data-i18n="Categories">Categories</div>
+            </a>
+        </li>
+
         <!-- Settings -->
         <li class="menu-item {{ request()->segment(2) == 'meta-details' ? 'active open' : '' }} {{ request()->segment(2) == 'currencies' ? 'open' : '' }} {{ request()->segment(2) == 'site-settings' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">

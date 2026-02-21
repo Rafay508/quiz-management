@@ -57,5 +57,8 @@ Route::name('admin.')->group(
         Route::resource('administrators', 'AdministratorsController');
         Route::resource('site-settings', 'SiteSettingsController');
         Route::resource('users', 'UsersController');
+        Route::get('categories/reports', 'CategoriesController@reports')->name('categories.reports.all');
+        Route::get('categories/{id}/reports', 'CategoriesController@reports')->name('categories.reports');
+        Route::resource('categories', 'CategoriesController');
     }
 );
