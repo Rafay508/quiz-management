@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\SiteSetting;
 use App\Http\Requests\Admin\UpdateSiteSettingRequest;
+use App\Http\Requests\Admin\UpdateQuizSettingRequest;
 
 class SiteSettingsController extends Controller
 {
@@ -135,5 +136,43 @@ class SiteSettingsController extends Controller
         return redirect()
             ->route('admin.adds.settings')
             ->with('success', 'Adds settings has been updated successfully!');
+    }
+
+    /**
+     * Display quiz settings page.
+     *
+     * @return Response
+     */
+    public function quizSettings()
+    {
+        $records = SiteSetting::find(1);
+
+        return view('admin.quiz-settings', compact('records'));
+    }
+
+    /**
+     * Update quiz settings.
+     *
+     * @param  UpdateQuizSettingRequest  $request
+     * @param  int  $id
+     * @return Response
+     */
+    public function updateQuizSettings(UpdateQuizSettingRequest $request, $id)
+    {
+        $data = $request->except([
+            '_token',
+            '_method',
+        ]);
+
+        // Convert checkbox values to boolean
+        $data['shuffle_questions'] = $request->has('shuffle_questions') ? true : false;
+        $data['shuffle_options'] = $request->has('shuffle_options') ? true : false;
+        $data['show_result_immediately'] = $request->has('show_result_immediately') ? true : false;
+
+        SiteSetting::where('id', $id)->update($data);
+
+        return redirect()
+            ->route('admin.quiz-settings.index')
+            ->with('success', 'Quiz settings has been updated successfully!');
     }
 }

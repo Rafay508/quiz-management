@@ -33,6 +33,7 @@ class StoreQuizRequest extends FormRequest
             'expiry_date' => 'nullable|date',
             'instructions' => 'nullable|string',
             'status' => 'required|in:draft,published,archived',
+            'random_questions_count' => 'nullable|integer|min:1',
         ];
     }
 

@@ -161,6 +161,33 @@
                                     @enderror
                                 </div>
 
+                                <!-- Quiz Settings -->
+                                <div class="card mb-3">
+                                    <div class="card-header">
+                                        <h6 class="mb-0">Quiz Settings</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="random_questions_count">Random Questions Count</label>
+                                            <div class="input-group input-group-merge">
+                                                <span class="input-group-text"><i class="ti ti-shuffle"></i></span>
+                                                <input
+                                                    type="number"
+                                                    class="form-control @error('random_questions_count') is-invalid @enderror"
+                                                    id="random_questions_count"
+                                                    name="random_questions_count"
+                                                    value="{{ old('random_questions_count', $quiz->random_questions_count ?? '') }}"
+                                                    min="1"
+                                                    placeholder="Leave empty to show all questions" />
+                                            </div>
+                                            @error('random_questions_count')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                            <small class="text-muted">Leave empty (null) to show all questions. Set a number to show only that many random questions per attempt.</small>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <!-- Advanced Settings (Coming Soon) -->
                                 <div class="card mb-3">
                                     <div class="card-header">

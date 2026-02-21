@@ -25,6 +25,7 @@ class Quiz extends Model
         'created_by',
         'instructions',
         'status',
+        'random_questions_count',
     ];
 
     protected $casts = [

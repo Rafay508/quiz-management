@@ -80,7 +80,7 @@
         </li>
 
         <!-- Settings -->
-        <li class="menu-item {{ request()->segment(2) == 'meta-details' ? 'active open' : '' }} {{ request()->segment(2) == 'currencies' ? 'open' : '' }} {{ request()->segment(2) == 'site-settings' ? 'open' : '' }}">
+        <li class="menu-item {{ request()->segment(2) == 'meta-details' ? 'active open' : '' }} {{ request()->segment(2) == 'currencies' ? 'open' : '' }} {{ request()->segment(2) == 'site-settings' ? 'open' : '' }} {{ request()->segment(2) == 'quiz-settings' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-settings-search"></i>
                 <div data-i18n="Settings">Settings</div>
@@ -89,6 +89,11 @@
                 <li class="menu-item {{ request()->segment(2) == 'site-settings' ? 'active' : '' }}">
                     <a href="{{ route('admin.site-settings.index') }}" class="menu-link">
                         <div data-i18n="Site Customization">Site Customization</div>
+                    </a>
+                </li>
+                <li class="menu-item {{ request()->segment(2) == 'quiz-settings' ? 'active' : '' }}">
+                    <a href="{{ route('admin.quiz-settings.index') }}" class="menu-link">
+                        <div data-i18n="Quiz Settings">Quiz Settings</div>
                     </a>
                 </li>
             </ul>
