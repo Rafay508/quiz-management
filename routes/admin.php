@@ -60,5 +60,11 @@ Route::name('admin.')->group(
         Route::get('categories/reports', 'CategoriesController@reports')->name('categories.reports.all');
         Route::get('categories/{id}/reports', 'CategoriesController@reports')->name('categories.reports');
         Route::resource('categories', 'CategoriesController');
+        
+        // Quiz Management
+        Route::post('quizzes/bulk-action', 'QuizController@bulkAction')->name('quizzes.bulk-action');
+        Route::post('quizzes/{quiz}/publish', 'QuizController@publish')->name('quizzes.publish');
+        Route::post('quizzes/{quiz}/archive', 'QuizController@archive')->name('quizzes.archive');
+        Route::resource('quizzes', 'QuizController');
     }
 );

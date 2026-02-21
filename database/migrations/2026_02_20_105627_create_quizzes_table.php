@@ -22,9 +22,6 @@ class CreateQuizzesTable extends Migration
             $table->integer('total_marks');
             $table->integer('pass_marks');
             $table->dateTime('expiry_date')->nullable();
-            $table->integer('attempts_allowed')->default(1);
-            $table->boolean('shuffle_questions')->default(false);
-            $table->boolean('show_result_immediately')->default(false);
             $table->boolean('is_published')->default(false);
             $table->foreignId('created_by')->constrained('admins')->onDelete('cascade');
             $table->text('instructions')->nullable();

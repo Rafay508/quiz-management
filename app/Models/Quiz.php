@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Admin;
 
 class Quiz extends Model
 {
@@ -47,6 +48,14 @@ class Quiz extends Model
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     * Get the admin who created this quiz.
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(Admin::class, 'created_by');
     }
 
     /**
