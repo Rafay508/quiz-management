@@ -13,6 +13,7 @@ class Question extends Model
         'quiz_id',
         'question_text',
         'question_type',
+        'difficulty_level',
         'image_url',
         'marks',
         'negative_marks',

@@ -79,6 +79,14 @@
             </a>
         </li>
 
+        <!-- Question Bank -->
+        <li class="menu-item {{ request()->segment(2) == 'questions' ? 'active' : '' }}">
+            <a href="{{ route('admin.questions.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-help"></i>
+                <div data-i18n="Question Bank">Question Bank</div>
+            </a>
+        </li>
+
         <!-- Settings -->
         <li class="menu-item {{ request()->segment(2) == 'meta-details' ? 'active open' : '' }} {{ request()->segment(2) == 'currencies' ? 'open' : '' }} {{ request()->segment(2) == 'site-settings' ? 'open' : '' }} {{ request()->segment(2) == 'quiz-settings' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">

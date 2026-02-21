@@ -68,5 +68,11 @@ Route::name('admin.')->group(
         Route::post('quizzes/{quiz}/publish', 'QuizController@publish')->name('quizzes.publish');
         Route::post('quizzes/{quiz}/archive', 'QuizController@archive')->name('quizzes.archive');
         Route::resource('quizzes', 'QuizController');
+        
+        // Question Bank Management
+        Route::get('questions/download-template', 'QuestionsController@downloadTemplate')->name('questions.download-template');
+        Route::post('questions/import', 'QuestionsController@import')->name('questions.import');
+        Route::post('questions/{question}/quick-update', 'QuestionsController@quickUpdate')->name('questions.quick-update');
+        Route::resource('questions', 'QuestionsController');
     }
 );
