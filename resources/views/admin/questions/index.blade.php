@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="card-datatable text-nowrap">
-                    <table class="dt-scrollableTable table">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -73,18 +73,28 @@
                         </thead>
                         <tbody>
                             @if(request('group_by') == 'quiz' && $questions instanceof \Illuminate\Support\Collection && $questions->first() instanceof \Illuminate\Support\Collection)
-                                @foreach($questions as $quizId => $quizQuestions)
-                                    <tr class="table-info">
-                                        <td colspan="7"><strong>Quiz: {{ $quizQuestions->first()->quiz->title ?? 'N/A' }}</strong></td>
-                                    </tr>
-                                    @foreach($quizQuestions as $question)
-                                        @include('admin.questions.partials.question-row', ['question' => $question])
+                                @if($questions->count() > 0)
+                                    @foreach($questions as $quizId => $quizQuestions)
+                                        <tr class="table-info">
+                                            <td colspan="6"><strong>Quiz: {{ $quizQuestions->first()->quiz->title ?? 'N/A' }}</strong></td>
+                                        </tr>
+                                        @foreach($quizQuestions as $question)
+                                            @include('admin.questions.partials.question-row', ['question' => $question])
+                                        @endforeach
                                     @endforeach
-                                @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6" class="text-center">No questions found.</td>
+                                    </tr>
+                                @endif
                             @else
-                                @foreach($questions as $question)
+                                @forelse($questions as $question)
                                     @include('admin.questions.partials.question-row', ['question' => $question])
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center">No questions found.</td>
+                                    </tr>
+                                @endforelse
                             @endif
                         </tbody>
                     </table>

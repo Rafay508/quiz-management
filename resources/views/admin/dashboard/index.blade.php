@@ -147,7 +147,7 @@
             </div>
 
             <!-- Recent Activities -->
-            <div class="row mb-4">
+            {{-- <div class="row mb-4">
                 <!-- Latest Quiz Attempts -->
                 <div class="col-lg-6 mb-4">
                     <div class="card">
@@ -156,7 +156,7 @@
                             <a href="{{ route('admin.quizzes.index') }}" class="btn btn-sm btn-label-secondary">View All</a>
                         </div>
                         <div class="card-datatable text-nowrap">
-                            <table class="dt-scrollableTable table">
+                            <table class="table">
                                 <thead>
                                     <tr>
                                         <th>User</th>
@@ -217,6 +217,11 @@
                                         </tr>
                                     @empty
                                         <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="3" class="text-center">No users found</td>
                                         </tr>
                                     @endforelse
@@ -225,7 +230,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <!-- / Content -->
         @include('admin.layouts.partials.footer')

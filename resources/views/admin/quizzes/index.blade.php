@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="card-datatable text-nowrap">
-                    <table class="dt-scrollableTable table">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th width="50">
