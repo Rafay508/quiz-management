@@ -188,38 +188,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Advanced Settings (Coming Soon) -->
-                                <div class="card mb-3">
-                                    <div class="card-header">
-                                        <h6 class="mb-0">Advanced Settings (Coming Soon)</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <label class="form-label">Scheduled Publishing</label>
-                                            <input type="text" class="form-control" disabled placeholder="Not available yet">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Featured Image</label>
-                                            <input type="file" class="form-control" disabled>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6 mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="shuffle_questions" disabled>
-                                                    <label class="form-check-label" for="shuffle_questions">Shuffle Questions</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="show_result_immediately" disabled>
-                                                    <label class="form-check-label" for="show_result_immediately">Show Result Immediately</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <small class="text-muted">These features will be available in a future update.</small>
-                                    </div>
-                                </div>
-
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">{{ isset($quiz) ? 'Update Quiz' : 'Create Quiz' }}</button>
                                     <a href="{{ route('admin.quizzes.index') }}" class="btn btn-label-secondary">Cancel</a>
