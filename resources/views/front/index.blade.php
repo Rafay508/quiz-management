@@ -1,5 +1,5 @@
 @extends('front.layouts.app')
-@section('title', 'Default Title')
+@section('title', 'QuizMaster - Online Quiz Management & Assessment Platform')
 
 @section('content')
     <!-- Courses Hero Section -->
@@ -11,41 +11,41 @@
 
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
               <div class="hero-text">
-                <h1>Transform Your Future with Expert-Led Online Courses</h1>
-                <p>Discover thousands of high-quality courses designed by industry professionals. Learn at your own pace, gain in-demand skills, and advance your career from anywhere in the world.</p>
+                <h1>Challenge Yourself with QuizMaster</h1>
+                <p>QuizMaster is an advanced quiz management platform that allows users to create, manage, and attempt quizzes effortlessly. Test your knowledge, track your performance, and improve your skills across multiple categories anytime, anywhere.</p>
 
                 <div class="hero-stats">
                   <div class="stat-item">
-                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="50000" data-purecounter-duration="2"></span>
-                    <span class="label">Students Enrolled</span>
+                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="15000" data-purecounter-duration="2"></span>
+                    <span class="label">Total Quiz Attempts</span>
                   </div>
                   <div class="stat-item">
-                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="2"></span>
-                    <span class="label">Expert Courses</span>
+                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="250" data-purecounter-duration="2"></span>
+                    <span class="label">Available Quizzes</span>
                   </div>
                   <div class="stat-item">
-                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="2"></span>
-                    <span class="label">Success Rate %</span>
+                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="87" data-purecounter-duration="2"></span>
+                    <span class="label">Average Score %</span>
                   </div>
                 </div>
 
                 <div class="hero-buttons">
-                  <a href="#courses" class="btn btn-primary">Browse Courses</a>
-                  <a href="#about" class="btn btn-outline">Learn More</a>
+                  <a href="#quizzes" class="btn btn-primary">Browse Quizzes</a>
+                  <a href="#how-it-works" class="btn btn-outline">How It Works</a>
                 </div>
 
                 <div class="hero-features">
                   <div class="feature">
                     <i class="bi bi-shield-check"></i>
-                    <span>Certified Programs</span>
+                    <span>Instant Results & Analytics</span>
                   </div>
                   <div class="feature">
                     <i class="bi bi-clock"></i>
-                    <span>Lifetime Access</span>
+                    <span>Timed & Practice Modes</span>
                   </div>
                   <div class="feature">
                     <i class="bi bi-people"></i>
-                    <span>Expert Instructors</span>
+                    <span>Multiple Quiz Categories</span>
                   </div>
                 </div>
               </div>
@@ -105,13 +105,13 @@
 
     </section><!-- /Courses Hero Section -->
 
-    <!-- Featured Courses Section -->
+    <!-- Featured Quizes Section -->
     <section id="featured-courses" class="featured-courses section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Featured Courses</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Featured Quizes</h2>
+        <p>Explore our most popular quizzes and test your knowledge across various subjects.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -123,116 +123,15 @@
               <div class="course-image">
                 <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
                 <div class="badge featured">Featured</div>
-                <div class="price-badge">$149</div>
+                <!-- <div class="price-badge">$149</div> -->
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Beginner</span>
-                  <span class="duration">8 Weeks</span>
+                  <span class="level">Duration: 60 Minutes</span>
+                  <span class="duration">60 Questions</span>
                 </div>
                 <h3><a href="#">Digital Marketing Fundamentals</a></h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-f-3.webp') }}" alt="Instructor" class="instructor-img">
-                  <div class="instructor-info">
-                    <h6>Sarah Johnson</h6>
-                    <span>Marketing Expert</span>
-                  </div>
-                </div>
-                <div class="course-stats">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <span>(4.5)</span>
-                  </div>
-                  <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>342 students</span>
-                  </div>
-                </div>
-                <a href="enroll.html" class="btn-course">Enroll Now</a>
-              </div>
-            </div>
-          </div><!-- End Course Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="course-card">
-              <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/campus-4.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge new">New</div>
-                <div class="price-badge">$89</div>
-              </div>
-              <div class="course-content">
-                <div class="course-meta">
-                  <span class="level">Intermediate</span>
-                  <span class="duration">6 Weeks</span>
-                </div>
-                <h3><a href="#">Web Development with JavaScript</a></h3>
-                <p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
-                <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-m-5.webp') }}" alt="Instructor" class="instructor-img">
-                  <div class="instructor-info">
-                    <h6>Michael Chen</h6>
-                    <span>Full Stack Developer</span>
-                  </div>
-                </div>
-                <div class="course-stats">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <span>(5.0)</span>
-                  </div>
-                  <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>156 students</span>
-                  </div>
-                </div>
-                <a href="enroll.html" class="btn-course">Enroll Now</a>
-              </div>
-            </div>
-          </div><!-- End Course Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="course-card">
-              <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/students-7.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge certificate">Certificate</div>
-                <div class="price-badge">Free</div>
-              </div>
-              <div class="course-content">
-                <div class="course-meta">
-                  <span class="level">Beginner</span>
-                  <span class="duration">4 Weeks</span>
-                </div>
-                <h3><a href="#">Introduction to Data Science</a></h3>
-                <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis.</p>
-                <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-f-7.webp') }}" alt="Instructor" class="instructor-img">
-                  <div class="instructor-info">
-                    <h6>Dr. Emily Watson</h6>
-                    <span>Data Scientist</span>
-                  </div>
-                </div>
-                <div class="course-stats">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <span>(4.2)</span>
-                  </div>
-                  <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>789 students</span>
-                  </div>
-                </div>
                 <a href="enroll.html" class="btn-course">Enroll Now</a>
               </div>
             </div>
@@ -241,140 +140,91 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="course-card">
               <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/education-5.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge popular">Popular</div>
-                <div class="price-badge">$199</div>
+                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge featured">Featured</div>
+                <!-- <div class="price-badge">$149</div> -->
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Advanced</span>
-                  <span class="duration">12 Weeks</span>
+                  <span class="level">Duration: 60 Minutes</span>
+                  <span class="duration">60 Questions</span>
                 </div>
-                <h3><a href="#">Business Strategy &amp; Leadership</a></h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo.</p>
-                <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-m-8.webp') }}" alt="Instructor" class="instructor-img">
-                  <div class="instructor-info">
-                    <h6>Robert Anderson</h6>
-                    <span>Business Consultant</span>
-                  </div>
-                </div>
-                <div class="course-stats">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <span>(4.7)</span>
-                  </div>
-                  <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>234 students</span>
-                  </div>
-                </div>
+                <h3><a href="#">Digital Marketing Fundamentals</a></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
                 <a href="enroll.html" class="btn-course">Enroll Now</a>
               </div>
             </div>
           </div><!-- End Course Item -->
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="course-card">
               <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/activities-3.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge certificate">Certificate</div>
-                <div class="price-badge">$129</div>
+                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge featured">Featured</div>
+                <!-- <div class="price-badge">$149</div> -->
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Intermediate</span>
-                  <span class="duration">10 Weeks</span>
+                  <span class="level">Duration: 60 Minutes</span>
+                  <span class="duration">60 Questions</span>
                 </div>
-                <h3><a href="#">Graphic Design Masterclass</a></h3>
-                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem.</p>
-                <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-f-12.webp') }}" alt="Instructor" class="instructor-img">
-                  <div class="instructor-info">
-                    <h6>Lisa Martinez</h6>
-                    <span>Creative Director</span>
-                  </div>
-                </div>
-                <div class="course-stats">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star"></i>
-                    <span>(4.3)</span>
-                  </div>
-                  <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>467 students</span>
-                  </div>
-                </div>
+                <h3><a href="#">Digital Marketing Fundamentals</a></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
                 <a href="enroll.html" class="btn-course">Enroll Now</a>
               </div>
             </div>
           </div><!-- End Course Item -->
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          {{-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="course-card">
               <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/teacher-6.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge new">New</div>
-                <div class="price-badge">$99</div>
+                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Quiz" class="img-fluid">
+                <div class="badge featured">Quiz</div>
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Beginner</span>
-                  <span class="duration">5 Weeks</span>
+                  <span class="level">60 Questions</span>
+                  <span class="duration">60 Minutes</span>
                 </div>
-                <h3><a href="#">Photography for Beginners</a></h3>
-                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas.</p>
+                <h3><a href="#">Digital Marketing Quiz</a></h3>
+                <p>Test your knowledge of digital marketing concepts including SEO, social media, content marketing, email campaigns, and analytics. Challenge yourself and measure your expertise.</p>
+                
                 <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-m-11.webp') }}" alt="Instructor" class="instructor-img">
+                  <img src="{{ asset('assets/front/img/person/person-f-3.webp') }}" alt="Quiz Creator" class="instructor-img">
                   <div class="instructor-info">
-                    <h6>James Wilson</h6>
-                    <span>Professional Photographer</span>
+                    <h6>Sarah Johnson</h6>
+                    <span>Quiz Creator</span>
                   </div>
                 </div>
-                <div class="course-stats">
-                  <div class="rating">
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i>
-                    <span>(4.6)</span>
-                  </div>
+
                   <div class="students">
                     <i class="bi bi-people-fill"></i>
-                    <span>298 students</span>
+                    <span>342 Attempts</span>
                   </div>
                 </div>
-                <a href="enroll.html" class="btn-course">Enroll Now</a>
+
+                <a href="start-quiz.html" class="btn-course">Start Quiz</a>
               </div>
             </div>
-          </div><!-- End Course Item -->
+          </div> --}} <!-- End Quiz Item -->
 
         </div>
 
         <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
-          <a href="courses.html" class="btn-more">View All Courses</a>
+          <a href="courses.html" class="btn-more">View All Quizes</a>
         </div>
 
       </div>
 
-    </section><!-- /Featured Courses Section -->
+    </section><!-- /Featured Quizes Section -->
 
-    <!-- Course Categories Section -->
+    <!-- Quiz Categories Section -->
     <section id="course-categories" class="course-categories section">
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Course Categories</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Quiz Categories</h2>
+        <p>Browse quizzes by category and choose the topic you want to explore.</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -387,7 +237,7 @@
                 <i class="bi bi-laptop"></i>
               </div>
               <h5>Computer Science</h5>
-              <span class="course-count">24 Courses</span>
+              <span class="course-count">24 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -397,7 +247,7 @@
                 <i class="bi bi-briefcase"></i>
               </div>
               <h5>Business</h5>
-              <span class="course-count">18 Courses</span>
+              <span class="course-count">18 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -407,7 +257,7 @@
                 <i class="bi bi-palette"></i>
               </div>
               <h5>Design</h5>
-              <span class="course-count">15 Courses</span>
+              <span class="course-count">15 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -417,7 +267,7 @@
                 <i class="bi bi-heart-pulse"></i>
               </div>
               <h5>Health &amp; Medical</h5>
-              <span class="course-count">12 Courses</span>
+              <span class="course-count">12 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -427,7 +277,7 @@
                 <i class="bi bi-globe"></i>
               </div>
               <h5>Languages</h5>
-              <span class="course-count">21 Courses</span>
+              <span class="course-count">21 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -437,7 +287,7 @@
                 <i class="bi bi-diagram-3"></i>
               </div>
               <h5>Science</h5>
-              <span class="course-count">16 Courses</span>
+              <span class="course-count">16 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -447,7 +297,7 @@
                 <i class="bi bi-megaphone"></i>
               </div>
               <h5>Marketing</h5>
-              <span class="course-count">19 Courses</span>
+              <span class="course-count">19 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -457,7 +307,7 @@
                 <i class="bi bi-graph-up-arrow"></i>
               </div>
               <h5>Finance</h5>
-              <span class="course-count">14 Courses</span>
+              <span class="course-count">14 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -467,7 +317,7 @@
                 <i class="bi bi-camera"></i>
               </div>
               <h5>Photography</h5>
-              <span class="course-count">11 Courses</span>
+              <span class="course-count">11 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -477,7 +327,7 @@
                 <i class="bi bi-music-note-beamed"></i>
               </div>
               <h5>Music</h5>
-              <span class="course-count">13 Courses</span>
+              <span class="course-count">13 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -487,7 +337,7 @@
                 <i class="bi bi-gear"></i>
               </div>
               <h5>Engineering</h5>
-              <span class="course-count">22 Courses</span>
+              <span class="course-count">22 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -497,7 +347,7 @@
                 <i class="bi bi-journal-text"></i>
               </div>
               <h5>Law &amp; Legal</h5>
-              <span class="course-count">9 Courses</span>
+              <span class="course-count">9 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -507,7 +357,7 @@
                 <i class="bi bi-cup-hot"></i>
               </div>
               <h5>Culinary Arts</h5>
-              <span class="course-count">8 Courses</span>
+              <span class="course-count">8 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -517,7 +367,7 @@
                 <i class="bi bi-trophy"></i>
               </div>
               <h5>Sports &amp; Fitness</h5>
-              <span class="course-count">17 Courses</span>
+              <span class="course-count">17 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -527,7 +377,7 @@
                 <i class="bi bi-pen"></i>
               </div>
               <h5>Writing</h5>
-              <span class="course-count">10 Courses</span>
+              <span class="course-count">10 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -537,7 +387,7 @@
                 <i class="bi bi-body-text"></i>
               </div>
               <h5>Psychology</h5>
-              <span class="course-count">12 Courses</span>
+              <span class="course-count">12 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -547,7 +397,7 @@
                 <i class="bi bi-tree"></i>
               </div>
               <h5>Environment</h5>
-              <span class="course-count">7 Courses</span>
+              <span class="course-count">7 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -557,7 +407,7 @@
                 <i class="bi bi-chat-dots"></i>
               </div>
               <h5>Communication</h5>
-              <span class="course-count">15 Courses</span>
+              <span class="course-count">15 Quizzes</span>
             </a>
           </div><!-- End Category Item -->
 
@@ -576,45 +426,45 @@
 
           <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
             <div class="cta-content">
-              <h2>Transform Your Future with Expert-Led Online Courses</h2>
-              <p>Join thousands of successful learners who have advanced their careers through our comprehensive online education platform.</p>
+              <h2>Enhance Your Knowledge with QuizMaster</h2>
+              <p>Join thousands of learners who are improving their skills through our smart and interactive quiz management platform. Practice, assess, and track your performance in real-time.</p>
 
               <div class="features-list">
                 <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>20+ Expert instructors with industry experience</span>
+                  <span>Wide range of categorized quizzes across multiple subjects</span>
                 </div>
                 <div class="feature-item" data-aos="fade-up" data-aos-delay="350">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Certificate of completion for every course</span>
+                  <span>Instant results with detailed performance analytics</span>
                 </div>
                 <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>24/7 access to course materials and resources</span>
+                  <span>Timed quizzes and practice mode options</span>
                 </div>
                 <div class="feature-item" data-aos="fade-up" data-aos-delay="450">
                   <i class="bi bi-check-circle-fill"></i>
-                  <span>Interactive assignments and real-world projects</span>
+                  <span>Secure and user-friendly quiz management system</span>
                 </div>
               </div>
 
               <div class="cta-actions" data-aos="fade-up" data-aos-delay="500">
-                <a href="courses.html" class="btn btn-primary">Browse Courses</a>
-                <a href="enroll.html" class="btn btn-outline">Enroll Now</a>
+                <a href="quizzes.html" class="btn btn-primary">Browse Quizzes</a>
+                <a href="start-quiz.html" class="btn btn-outline">Start Quiz</a>
               </div>
 
               <div class="stats-row" data-aos="fade-up" data-aos-delay="400">
                 <div class="stat-item">
-                  <h3><span data-purecounter-start="0" data-purecounter-end="15000" data-purecounter-duration="2" class="purecounter"></span>+</h3>
-                  <p>Students Enrolled</p>
+                  <h3><span data-purecounter-start="0" data-purecounter-end="20000" data-purecounter-duration="2" class="purecounter"></span>+</h3>
+                  <p>Total Quiz Attempts</p>
                 </div>
                 <div class="stat-item">
-                  <h3><span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="2" class="purecounter"></span>+</h3>
-                  <p>Courses Available</p>
+                  <h3><span data-purecounter-start="0" data-purecounter-end="300" data-purecounter-duration="2" class="purecounter"></span>+</h3>
+                  <p>Quizzes Available</p>
                 </div>
                 <div class="stat-item">
-                  <h3><span data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="2" class="purecounter"></span>%</h3>
-                  <p>Success Rate</p>
+                  <h3><span data-purecounter-start="0" data-purecounter-end="89" data-purecounter-duration="2" class="purecounter"></span>%</h3>
+                  <p>Average Score Rate</p>
                 </div>
               </div>
             </div>
@@ -622,22 +472,22 @@
 
           <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
             <div class="cta-image">
-              <img src="{{ asset('assets/front/img/education/courses-4.webp') }}" alt="Online Learning Platform" class="img-fluid">
+              <img src="{{ asset('assets/front/img/education/courses-4.webp') }}" alt="QuizMaster Platform" class="img-fluid">
               <div class="floating-element student-card" data-aos="zoom-in" data-aos-delay="600">
                 <div class="card-content">
                   <i class="bi bi-person-check-fill"></i>
                   <div class="text">
-                    <span class="number">2,450</span>
-                    <span class="label">New Students This Month</span>
+                    <span class="number">3,200</span>
+                    <span class="label">New Quiz Attempts This Month</span>
                   </div>
                 </div>
               </div>
               <div class="floating-element course-card" data-aos="zoom-in" data-aos-delay="700">
                 <div class="card-content">
-                  <i class="bi bi-play-circle-fill"></i>
+                  <i class="bi bi-clipboard-check-fill"></i>
                   <div class="text">
-                    <span class="number">50+</span>
-                    <span class="label">Hours of Content</span>
+                    <span class="number">75+</span>
+                    <span class="label">Active Quiz Categories</span>
                   </div>
                 </div>
               </div>
