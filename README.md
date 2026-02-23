@@ -64,3 +64,20 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+### Reference Portal
+https://preview.codecanyon.net/item/quick-quiz-laravel-quiz-and-exam-system/full_screen_preview/21117633
+
+- ** Authorization
+
+- ** Admin:
+URL: https://quickquiz.mediacity.co.in/public/home
+
+Username: admin@mediacity.co.in
+Password: 123456
+
+- ** User:
+URL: https://quickquiz.mediacity.co.in/public/home
+
+Username: user@mediacity.co.in
+Password: 123456
