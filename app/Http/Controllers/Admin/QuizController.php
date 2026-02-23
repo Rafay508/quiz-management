@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Controller;
 use App\Models\Quiz;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class QuizController extends Controller
 {
@@ -72,11 +73,27 @@ class QuizController extends Controller
     {
         $data = $request->except([
             '_token',
-            '_method'
+            '_method',
+            'image'
         ]);
 
         // Set created_by to logged-in admin
         $data['created_by'] = auth()->user()->id;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $uploadPath = public_path('uploads/quizzes');
+            
+            // Create directory if it doesn't exist
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true);
+            }
+            
+            $image->move($uploadPath, $imageName);
+            $data['image'] = 'uploads/quizzes/' . $imageName;
+        }
 
         // Enforce status and is_published mapping
         if ($data['status'] == 'published') {
@@ -118,8 +135,29 @@ class QuizController extends Controller
 
         $data = $request->except([
             '_token',
-            '_method'
+            '_method',
+            'image'
         ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($quiz->image && File::exists(public_path($quiz->image))) {
+                File::delete(public_path($quiz->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $uploadPath = public_path('uploads/quizzes');
+            
+            // Create directory if it doesn't exist
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true);
+            }
+            
+            $image->move($uploadPath, $imageName);
+            $data['image'] = 'uploads/quizzes/' . $imageName;
+        }
 
         // Enforce status and is_published mapping
         if ($data['status'] == 'published') {

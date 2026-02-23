@@ -23,6 +23,7 @@
                   <table class="dt-scrollableTable table">
                     <thead>
                       <tr>
+                        <th>Image</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Quiz Count</th>
@@ -33,6 +34,13 @@
                     <tbody>
                         @foreach ($categories as $key => $category)
                             <tr>
+                                <td>
+                                    @if($category->image)
+                                        <img src="{!! asset($category->image) !!}" alt="{!! $category->name !!}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+                                    @else
+                                        <span class="text-muted">No image</span>
+                                    @endif
+                                </td>
                                 <td>{!! $category->name !!}</td>
                                 <td>{!! Str::limit($category->description ?? 'N/A', 50, '...') !!}</td>
                                 <td>{!! $category->quizzes_count !!}</td>
@@ -74,7 +82,7 @@
                                                 <h3 class="mb-2">Edit Category</h3>
                                             </div>
 
-                                            <form class="row g-3" action="{!! route('admin.categories.update', $category->id) !!}" method="POST">
+                                            <form class="row g-3" action="{!! route('admin.categories.update', $category->id) !!}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="col-12">
@@ -90,6 +98,23 @@
                                                     <label class="form-label" for="edit_description_{!! $category->id !!}">Description</label>
                                                     <textarea class="form-control" name="description" id="edit_description_{!! $category->id !!}" placeholder="Category Description" rows="3">{!! old('description', $category->description) !!}</textarea>
                                                     @error('description')
+                                                        <div class="text-danger">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-12">
+                                                    <label class="form-label" for="edit_image_{!! $category->id !!}">Image</label>
+                                                    <input type="file" name="image" id="edit_image_{!! $category->id !!}" class="form-control" accept="image/*" onchange="previewImage(this, 'edit_imagePreview_{!! $category->id !!}')" />
+                                                    <div class="mt-2" id="edit_imagePreview_{!! $category->id !!}">
+                                                        @if($category->image)
+                                                            <img src="{!! asset($category->image) !!}" alt="Current Image" style="max-width: 200px; max-height: 200px; border-radius: 4px;" />
+                                                            <p class="text-muted mt-1">Current image</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mt-2" id="edit_imagePreviewNew_{!! $category->id !!}" style="display: none;">
+                                                        <img id="edit_imagePreviewNewImg_{!! $category->id !!}" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 4px;" />
+                                                        <p class="text-muted mt-1">New image preview</p>
+                                                    </div>
+                                                    @error('image')
                                                         <div class="text-danger">{{ $message }}</div>
                                                     @enderror
                                                 </div>
@@ -136,7 +161,7 @@
                     <h3 class="mb-2">Add Category</h3>
                 </div>
 
-                <form class="row g-3" action="{!! route('admin.categories.store') !!}" method="POST">
+                                            <form class="row g-3" action="{!! route('admin.categories.store') !!}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-12">
                         <label class="form-label w-100" for="name">Name *</label>
@@ -151,6 +176,16 @@
                         <label class="form-label" for="description">Description</label>
                         <textarea class="form-control" name="description" id="description" placeholder="Category Description" rows="3">{!! old('description') !!}</textarea>
                         @error('description')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" for="image">Image</label>
+                        <input type="file" name="image" id="image" class="form-control" accept="image/*" onchange="previewImage(this, 'imagePreview')" />
+                        <div class="mt-2" id="imagePreview" style="display: none;">
+                            <img id="imagePreviewImg" src="" alt="Preview" style="max-width: 200px; max-height: 200px; border-radius: 4px;" />
+                        </div>
+                        @error('image')
                             <div class="text-danger">{{ $message }}</div>
                         @enderror
                     </div>
@@ -176,6 +211,47 @@
 
 <script>
 var categoriesData = {!! json_encode($categories->map(function($cat) { return ['id' => $cat->id, 'name' => $cat->name]; })) !!};
+
+function previewImage(input, previewId) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            // Check if this is an edit form (has edit_imagePreview_ prefix)
+            if (previewId && previewId.indexOf('edit_imagePreview_') !== -1) {
+                // For edit forms, show new preview and hide current image
+                var categoryId = previewId.replace('edit_imagePreview_', '');
+                var currentPreview = document.getElementById('edit_imagePreview_' + categoryId);
+                var newPreview = document.getElementById('edit_imagePreviewNew_' + categoryId);
+                
+                if (currentPreview) {
+                    currentPreview.style.display = 'none';
+                }
+                
+                if (newPreview) {
+                    var newImg = document.getElementById('edit_imagePreviewNewImg_' + categoryId);
+                    if (newImg) {
+                        newImg.src = e.target.result;
+                        newPreview.style.display = 'block';
+                    }
+                }
+            } else {
+                // For create form
+                var previewElement = document.getElementById(previewId);
+                if (previewElement) {
+                    var img = document.getElementById(previewId + 'Img');
+                    if (!img) {
+                        img = previewElement.querySelector('img');
+                    }
+                    if (img) {
+                        img.src = e.target.result;
+                        previewElement.style.display = 'block';
+                    }
+                }
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
 function deleteCategoryConfirmation(id, quizCount) {
     if (quizCount > 0) {

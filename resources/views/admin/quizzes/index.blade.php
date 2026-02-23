@@ -86,6 +86,7 @@
                                     <input type="checkbox" class="form-check-input" id="selectAllTable">
                                 </th>
                                 <th>ID</th>
+                                <th>Image</th>
                                 <th>Title</th>
                                 <th>Category</th>
                                 <th>Duration</th>
@@ -101,6 +102,13 @@
                                         <input type="checkbox" class="form-check-input quiz-checkbox" value="{{ $quiz->id }}">
                                     </td>
                                     <td>{{ $quiz->id }}</td>
+                                    <td>
+                                        @if($quiz->image)
+                                            <img src="{{ asset($quiz->image) }}" alt="{{ $quiz->title }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;" />
+                                        @else
+                                            <span class="text-muted">No image</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $quiz->title }}</td>
                                     <td>{{ $quiz->category->name ?? 'N/A' }}</td>
                                     <td>{{ $quiz->duration_minutes }} min</td>
@@ -151,7 +159,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="text-center">No quizzes found.</td>
+                                    <td colspan="9" class="text-center">No quizzes found.</td>
                                 </tr>
                             @endforelse
                         </tbody>

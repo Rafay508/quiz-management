@@ -15,7 +15,7 @@
                             <h5 class="mb-0">{{ isset($quiz) ? 'Edit Quiz' : 'Create Quiz' }}</h5>
                         </div>
                         <div class="card-body">
-                            <form method="POST" action="{{ isset($quiz) ? route('admin.quizzes.update', $quiz->id) : route('admin.quizzes.store') }}" class="number-tab-steps wizard-circle">
+                            <form method="POST" action="{{ isset($quiz) ? route('admin.quizzes.update', $quiz->id) : route('admin.quizzes.store') }}" class="number-tab-steps wizard-circle" enctype="multipart/form-data">
                                 @csrf
                                 @if(isset($quiz))
                                     @method('PUT')
@@ -63,6 +63,32 @@
                                     @error('description')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label" for="image">Image</label>
+                                    <input
+                                        type="file"
+                                        class="form-control @error('image') is-invalid @enderror"
+                                        id="image"
+                                        name="image"
+                                        accept="image/*"
+                                        onchange="previewQuizImage(this)" />
+                                    @error('image')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                    <div class="mt-2" id="imagePreviewContainer">
+                                        @if(isset($quiz) && $quiz->image)
+                                            <div id="currentImagePreview">
+                                                <img src="{{ asset($quiz->image) }}" alt="Current Image" style="max-width: 300px; max-height: 300px; border-radius: 4px; border: 1px solid #ddd;" />
+                                                <p class="text-muted mt-1">Current image</p>
+                                            </div>
+                                        @endif
+                                        <div id="newImagePreview" style="display: none;">
+                                            <img id="newImagePreviewImg" src="" alt="Preview" style="max-width: 300px; max-height: 300px; border-radius: 4px; border: 1px solid #ddd;" />
+                                            <p class="text-muted mt-1">New image preview</p>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -219,5 +245,28 @@
             $('#pass_marks').val(totalMarks);
         }
     });
+
+    // Preview image function
+    function previewQuizImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                // Hide current image preview if exists
+                var currentPreview = document.getElementById('currentImagePreview');
+                if (currentPreview) {
+                    currentPreview.style.display = 'none';
+                }
+                
+                // Show new image preview
+                var newPreview = document.getElementById('newImagePreview');
+                var newPreviewImg = document.getElementById('newImagePreviewImg');
+                if (newPreview && newPreviewImg) {
+                    newPreviewImg.src = e.target.result;
+                    newPreview.style.display = 'block';
+                }
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 @endsection

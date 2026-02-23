@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class CategoriesController extends Controller
 {
@@ -44,10 +45,26 @@ class CategoriesController extends Controller
     {
         $data = $request->except([
             '_token',
-            '_method'
+            '_method',
+            'image'
         ]);
 
         $data['created_by'] = auth()->user()->id;
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $uploadPath = public_path('uploads/categories');
+            
+            // Create directory if it doesn't exist
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true);
+            }
+            
+            $image->move($uploadPath, $imageName);
+            $data['image'] = 'uploads/categories/' . $imageName;
+        }
 
         Category::create($data);
 
@@ -69,8 +86,29 @@ class CategoriesController extends Controller
 
         $data = $request->except([
             '_token',
-            '_method'
+            '_method',
+            'image'
         ]);
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($category->image && File::exists(public_path($category->image))) {
+                File::delete(public_path($category->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $uploadPath = public_path('uploads/categories');
+            
+            // Create directory if it doesn't exist
+            if (!File::exists($uploadPath)) {
+                File::makeDirectory($uploadPath, 0755, true);
+            }
+            
+            $image->move($uploadPath, $imageName);
+            $data['image'] = 'uploads/categories/' . $imageName;
+        }
 
         $category->update($data);
 

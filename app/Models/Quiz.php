@@ -13,6 +13,7 @@ class Quiz extends Model
     protected $fillable = [
         'title',
         'description',
+        'image',
         'category_id',
         'duration_minutes',
         'total_marks',
