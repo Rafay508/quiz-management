@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\MetaDetail;
 
 class LoginController extends Controller
 {
@@ -54,20 +53,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $meta = MetaDetail::wherePage('login')->first();
 
-        if ($meta) {
-            $seoData = [
-                'title' => $meta->meta_title ?? 'Default Title',
-                'description' => $meta->meta_description ?? 'Default description',
-                'keywords' => $meta->meta_keywords ?? 'Default, Keywords',
-                'h1' => $meta->h1 ?? 'Default H1',
-            ];
-        } else {
-            $seoData = [];
-        }
-
-        return view('front.auth.login', compact('seoData'));
+        return view('front.auth.login');
     }
 
     /**

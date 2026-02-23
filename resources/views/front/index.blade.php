@@ -1,981 +1,652 @@
 @extends('front.layouts.app')
-@section('title', @$seoData['title'] ?? 'Default Title')
+@section('title', 'Default Title')
 
 @section('content')
+    <!-- Courses Hero Section -->
+    <section id="courses-hero" class="courses-hero section light-background">
 
-<div class="container mt-md-3 mt-5 margin overflow-hidden" style='width:100vw'>
-    <div class="row justify-content-center mt-0 mt-md-0">
-        <div class="col-md-12 col-lg-12">
-            <div class="row d-none d-md-block">
-                <div class="col-12">
-                    @if ($siteSettings->home_banner && file_exists(uploadsDir('front') . $siteSettings->home_banner))
-                        <img src="{!! asset(uploadsDir('front') . $siteSettings->home_banner) !!}" alt="Home banner"
-                        class="d-block w-100 lazy">
-                    @else
-                        <img src="{{ asset('assets/front/images/Slide1.png') }}" alt="Home banner" class="d-block w-100 lazy">
-                    @endif
+      <div class="hero-content">
+        <div class="container">
+          <div class="row align-items-center">
+
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="hero-text">
+                <h1>Transform Your Future with Expert-Led Online Courses</h1>
+                <p>Discover thousands of high-quality courses designed by industry professionals. Learn at your own pace, gain in-demand skills, and advance your career from anywhere in the world.</p>
+
+                <div class="hero-stats">
+                  <div class="stat-item">
+                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="50000" data-purecounter-duration="2"></span>
+                    <span class="label">Students Enrolled</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="1200" data-purecounter-duration="2"></span>
+                    <span class="label">Expert Courses</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="number purecounter" data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="2"></span>
+                    <span class="label">Success Rate %</span>
+                  </div>
                 </div>
+
+                <div class="hero-buttons">
+                  <a href="#courses" class="btn btn-primary">Browse Courses</a>
+                  <a href="#about" class="btn btn-outline">Learn More</a>
+                </div>
+
+                <div class="hero-features">
+                  <div class="feature">
+                    <i class="bi bi-shield-check"></i>
+                    <span>Certified Programs</span>
+                  </div>
+                  <div class="feature">
+                    <i class="bi bi-clock"></i>
+                    <span>Lifetime Access</span>
+                  </div>
+                  <div class="feature">
+                    <i class="bi bi-people"></i>
+                    <span>Expert Instructors</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="row py-md-4 g-1">
-                <div class="col col-12 col-md-6 ">
-                    <h5 class='fw-bold px-2 py-1 border-start border-danger border-4 heading mb-3'>Lets Find a Mobile
-                        Phone
-                    </h5>
-                    <form action="{{ route('filter-mobile') }}" method="GET" class="container p-2 ps-md-1 pe-md-5 px-3 d-flex flex-column gap-md-3 gap-1 mt-md-4 mt-2">
 
-                        <div class="slider-container mt-2" style="position: relative; width: 100%; height: 50px;">
-                            <div class="slider-track accent-color">
-                            </div>
-                            <input class='range range-1' type="range" min="0" max="1000000" value="0" id="slider-1">
-                            <input class='range range-2' type="range" min="0" max="1000000" value="1000000"
-                                id="slider-2">
-                            <div class="values d-none">Value</div>
-                        </div>
-
-                        <div class="d-flex flex-row justify-content-center gap-0 gap-md-4 align-items-center ">
-                            <div class="d-flex flex-row gap-3 align-items-center">
-                                <p class='fw-bold mt-2 d-none d-md-block'>RS.</p>
-                                <input type="text"
-                                    class='form-control form-control-sm w-md-75 fw-semibold p-md-2 p-2 py-2 px-md-4 px-2 rounded text-black-50 fs-6 range-input'
-                                    min="0" max="1000000" value="0" id="range1" name="min_price">
-                            </div>
-                            <p class='text-custom fw-bold fs-5 m-2 mx-3'>TO</p>
-                            <div class="d-flex flex-row gap-3 align-items-center justify-content-end">
-                                <p class='fw-bold mt-2 d-none d-md-block'>RS.</p>
-                                <input type="text"
-                                    class='form-control form-control-sm w-md-75 fw-semibold p-md-2 p-2 py-2 px-md-4 px-2 rounded text-black-50 fs-6 range-input'
-                                    min="0" max="1000000" value="1000000" id="range2" name="max_price">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-custom rounded-1 py-2 fw-bold focus-shadow text-center d-flex align-items-center justify-content-center btn-find mt-4 mt-md-0"
-                            onclick="this.classList.toggle('nav-shadow')">Find Mobile
-                        </button>
-                        <div class="d-flex flex-column gap-2 mt-3 mt-md-2">
-                            <h6 class='fw-bold text-black-50 form-placeholder'>Browse By Budget</h6>
-                            <div class="row flex-row mt-2">
-                                <div class="budget-slider-wrapper d-md-none d-block">
-                                    <div class="budget-slider">
-                                        <a href="{{ route('filter-mobile', ['budget' => 10000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            10K
-                                        </a>
-                                        <a href="{{ route('filter-mobile', ['budget' => 15000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            15K
-                                        </a>
-                                        <a href="{{ route('filter-mobile', ['budget' => 25000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            25K
-                                        </a>
-                                        <a href="{{ route('filter-mobile', ['budget' => 35000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            35K
-                                        </a>
-                                        <a href="{{ route('filter-mobile', ['budget' => 45000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            45K
-                                        </a>
-                                        <a href="{{ route('filter-mobile', ['budget' => 65000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            65K
-                                        </a>
-                                        <a href="{{ route('filter-mobile', ['budget' => 85000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            85K
-                                        </a>
-                                        <a href="{{ route('filter-mobile') }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-3 px-md-2 px-xl-3">
-                                            Above
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="col d-flex flex-row g-0 justify-content-center gap-1 gap-lg-2 gap-xl-2 d-md-block d-none">
-                                    <a href="{{ route('filter-mobile', ['budget' => 10000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        10K
-                                    </a>
-                                    <a href="{{ route('filter-mobile', ['budget' => 15000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        15K
-                                    </a>
-                                    <a href="{{ route('filter-mobile', ['budget' => 25000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        25K
-                                    </a>
-                                    <a href="{{ route('filter-mobile', ['budget' => 35000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        35K
-                                    </a>
-                                    <a href="{{ route('filter-mobile', ['budget' => 45000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        45K
-                                    </a>
-                                    <a href="{{ route('filter-mobile', ['budget' => 65000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        65K
-                                    </a>
-                                    <a href="{{ route('filter-mobile', ['budget' => 85000]) }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        85K
-                                    </a>
-                                    <a href="{{ route('filter-mobile') }}" class="btn btn-outline-light btn-price fw-semibold card-shadow px-2 px-xl-3">
-                                        Above
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="hero-image">
+                <div class="main-image">
+                  <img src="{{ asset('assets/front/img/education/courses-13.webp') }}" alt="Online Learning" class="img-fluid">
                 </div>
-                <!-- Brands -->
-                <div class="col col-12 col-md-6 d-flex flex-column gap-3 mt-5 mt-md-0 d-none d-md-block">
-                    <h5 class='fw-bold px-2 py-1 border-start border-danger border-4 heading'>By Brand</h5>
-                    <div class="row g-0 mt-4">
-                        <div class="col col-4 d-flex flex-column gap-custom">
-                            @foreach (@$brands->take(5) as $key => $brand)
-                                <p class='py-0 px-2 border-start border-dark-50 border-1 d-flex flex-row justify-content-between align-items-center brand-768'>
-                                    <a href="{{ route('product-by.brand', $brand->slug) }}" class="text-decoration-none fw-bold text-hover ">{{ ucfirst($brand->name) }} </a>
-                                    <img src="{{ asset('assets/front/images/Navigation Left Icon.svg') }}" alt="Softliee" height='30' width='40' class=" lazy">
-                                </p>
-                            @endforeach
-                        </div>
-                        <div class="col col-4 d-flex flex-column gap-custom">
-                            @foreach (@$brands->skip(5)->take(5) as $brand)
-                                <p class='py-0 px-2 border-start border-dark-50 border-1 d-flex flex-row justify-content-between align-items-center brand-768'>
-                                    <a href="{{ route('product-by.brand', $brand->slug) }}" class='text-decoration-none fw-bold text-hover '>{{ ucfirst($brand->name) }} </a>
-                                    <img src="{{ asset('assets/front/images/Navigation Left Icon.svg') }}" alt="Softliee" height='30' width='40' class=" lazy">
-                                </p>
-                            @endforeach
-                        </div>
-                        <div class="col col-4 d-flex flex-column gap-custom">
-                            @foreach (@$brands->skip(10)->take(4) as $brand)
-                                <p class='py-0 px-2 border-start border-dark-50 border-1 d-flex flex-row justify-content-between align-items-center brand-768'>
-                                    <a href="{{ route('product-by.brand', $brand->slug) }}" class='text-decoration-none fw-bold text-hover '>{{ ucfirst($brand->name) }} </a>
-                                    <img src="{{ asset('assets/front/images/Navigation Left Icon.svg') }}" alt="Softliee" height='30' width='40' class=" lazy">
-                                </p>
-                            @endforeach
-                            <p
-                                class='py-0 px-2 border-start border-dark-50 border-1 d-flex flex-row justify-content-between align-items-center fw-bold brand-768'>
-                                <a href="#" class='text-decoration-none fw-bold text-dark'>More </a><img
-                                    src="{{ asset('assets/front/images/Navigation Left Icon.svg') }}" alt="Softliee"
-                                    height='30' width='40' class=" lazy">
-                            </p>
-                        </div>
+
+                <div class="floating-cards">
+                  <div class="course-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-icon">
+                      <i class="bi bi-code-slash"></i>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ads -->
-{{-- <section class="ads-section margin-bottom-50px">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12">
-                <p class="ads-text">ADS</p>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2933454440337038" crossorigin="anonymous"></script>
-                    <!-- 720 x90 -->
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-2933454440337038"
-                         data-ad-slot="6702463586"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-            </div>
-        </div>
-    </div>
-</section> --}}
-
-<!-- Recommended for you -->
-@if (@$trending_products && count($trending_products) > 0)
-<div class="container pt-md-3 py-1 pb-0 overflow-hidden" style='width:100vw'>
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-12">
-            <div class="row py-4 px-0">
-                <h5 class='fw-bold px-2 pt-1 border-start border-danger border-4 mx-3 heading'>
-                    Recommended For You</h5>
-                <div class="container py-4">
-                    <div class="custom-slider-container">
-                        <div class="custom-slider-wrapper carousel-wrapper" id="sliderWrapper1">
-                            @foreach ($trending_products as $product)
-                                <div class="carousel-slide custom-slider-item py-1">
-                                    <div class="card rounded-0 pt-2 px-md-0 px-0 px-lg-0 px-xl-0 border-secondary border-opacity-25 card-shadow">
-                                        @if ($product->image && file_exists(public_path('uploads/products/' . $product->image)))
-                                            <a href="{{ route('product.details', $product->slug) }}" class='text-decoration-none'>
-                                                <img class="card-img-top px-md-5 px-lg-4 px-3 pt-2 prod-img  lazy"
-                                                     src="{{ asset('uploads/products/' . $product->image) }}" alt="{{ $product->alt_image }}" width='4vw' >
-                                            </a>
-                                        @else
-                                            <img class="card-img-top px-md-5 px-3 pt-2  lazy"
-                                                 src="https://via.placeholder.com/300x100.png?text=No+Image"
-                                                 alt="placeholder image">
-                                        @endif
-
-                                        <div class="card-body text-center px-0">
-                                            @if (@$product->galleries && count($product->galleries) > 0)
-                                                <a href="{{ route('product.pictures', $product->slug) }}" 
-                                                   class="card-text text-black-50 vertical-card form-placeholder fw-bold text-decoration-underline mb-2">
-                                                   View Photos ({{ count($product->galleries) }})
-                                                </a>
-                                            @endif
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <h6 class="card-text fw-bolder text-black product-font mt-1 mb-1">
-                                                    {{ ucfirst($product->name) }}
-                                                </h6>
-                                            </a>
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <p class="card-text fw-semibold product-price mt-0 mb-2" style='color: #737373;'>
-                                                    {!! env('CURRENCY', 'PKR') . ' ' . number_format($product->original_price) !!}
-                                                </p>
-                                            </a>
-
-                                            <a href="{{ route('compare-page', ['from' => $product->slug]) }}" class="btn btn-custom rounded-1 font-sm px-md-3 px-3 fw-medium mt-0">
-                                                Compare <i class="ms-1 fa-solid fa-plus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="carousel-scrollbar">
-                                <div class="scrollbar-thumb"></div>
-                            </div>
-
-                        </div>
-                        <!-- Controls -->
-                        <button
-                            class="custom-slider-control custom-slider-control-prev text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="prev1">
-                            <p style='position:relative;top: -11px;'>&lt;</p>
-                        </button>
-                        <button
-                            class="custom-slider-control custom-slider-control-next text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="next1">
-                            <p style='position:relative;top: -11px;'>&gt;</p>
-                        </button>
+                    <div class="card-content">
+                      <h6>Web Development</h6>
+                      <span>2,450 Students</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
+                  </div>
 
-<!-- Popular for you -->
-@if (@$popular_products && count($popular_products) > 0)
-<div class="container pt-md-0 py-1 pb-0 overflow-hidden" style='width:100vw'>
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-12">
-            <div class="row py-4 px-0">
-                <h5 class='fw-bold px-2 pt-1 border-start border-danger border-4 mx-3 heading'>Populer
-                    Mobiles For You</h5>
-                <div class="container py-4">
-                    <div class="custom-slider-container">
-                        <div class="custom-slider-wrapper carousel-wrapper" id="sliderWrapper2">
-                            @foreach ($popular_products as $product)
-                                <div class="carousel-slide custom-slider-item py-1">
-                                    <div class="card rounded-0 pt-2 px-md-0 px-0 px-lg-0 px-xl-0 border-secondary border-opacity-25 card-shadow">
-                                        @if ($product->image && file_exists(public_path('uploads/products/' . $product->image)))
-                                            <a href="{{ route('product.details', $product->slug) }}" class='text-decoration-none'>
-                                                <img class="card-img-top px-md-5 px-lg-4 px-3 pt-2 prod-img  lazy"
-                                                     src="{{ asset('uploads/products/' . $product->image) }}" alt="{{ $product->alt_image }}" width='4vw'>
-                                            </a>
-                                        @else
-                                            <img class="card-img-top px-md-5 px-3 pt-2  lazy"
-                                                 src="https://via.placeholder.com/300x100.png?text=No+Image"
-                                                 alt="placeholder image">
-                                        @endif
-
-                                        <div class="card-body text-center px-0">
-                                            @if (@$product->galleries && count($product->galleries) > 0)
-                                                <a href="{{ route('product.pictures', $product->slug) }}" 
-                                                   class="card-text text-black-50 vertical-card form-placeholder fw-bold text-decoration-underline mb-2">
-                                                   View Photos ({{ count($product->galleries) }})
-                                                </a>
-                                            @endif
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <h6 class="card-text fw-semibold text-black product-font  mt-1 mb-1">
-                                                    {{ ucfirst($product->name) }}
-                                                </h6>
-                                            </a>
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <p class="card-text fw-bold product-price mt-0 mb-2" style='color: #737373;'>
-                                                    {!! env('CURRENCY', 'PKR') . ' ' . number_format($product->original_price) !!}
-                                                </p>
-                                            </a>
-
-                                            <a href="{{ route('compare-page', ['from' => $product->slug]) }}" class="btn btn-custom rounded-1 font-sm px-md-3 px-3 fw-medium mt-0">
-                                                Compare <i class="ms-1 fa-solid fa-plus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="carousel-scrollbar">
-                                <div class="scrollbar-thumb"></div>
-                            </div>
-
-                        </div>
-                        <!-- Controls -->
-                        <button
-                            class="custom-slider-control custom-slider-control-prev text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="prev2">
-                            <p style='position:relative;top: -11px;'>&lt;</p>
-                        </button>
-                        <button
-                            class="custom-slider-control custom-slider-control-next text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="next2">
-                            <p style='position:relative;top: -11px;'>&gt;</p>
-                        </button>
+                  <div class="course-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card-icon">
+                      <i class="bi bi-palette"></i>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-
-<!-- Upcomming for you -->
-@if (@$upcoming_products && count($upcoming_products) > 0)
-<div class="container py-md-0 py-1 pb-0 overflow-hidden" style='width:100vw'>
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-12">
-            <div class="row py-4 px-0">
-                <h5 class='fw-bold px-2 pt-1 border-start border-danger border-4 mx-3 heading'>Upcoming
-                    Mobiles For You</h5>
-                <div class="container py-4">
-                    <div class="custom-slider-container">
-                        <div class="custom-slider-wrapper carousel-wrapper" id="sliderWrapper3">
-                            {{-- @foreach ($upcoming_products as $product)
-                                <div class="carousel-slide custom-slider-item py-1">
-                                    <div class="card rounded-0 pt-2 px-md-0 px-0 px-lg-0 px-xl-0 border-secondary border-opacity-25 card-shadow">
-                                        @if ($product->image && file_exists(public_path('uploads/products/' . $product->image)))
-                                            <a href="{{ route('product.details', $product->slug) }}" class='text-decoration-none'>
-                                                <img class="card-img-top px-md-5 px-lg-4 px-3 pt-2 prod-img  lazy"
-                                                     src="{{ asset('uploads/products/' . $product->image) }}" alt="{{ $product->alt_image }}" width='4vw'>
-                                            </a>
-                                        @else
-                                            <img class="card-img-top px-md-5 px-3 pt-2  lazy"
-                                                 src="https://via.placeholder.com/300x100.png?text=No+Image"
-                                                 alt="placeholder image">
-                                        @endif
-
-                                        <div class="card-body text-center px-0 ">
-                                            @if (@$product->galleries && count($product->galleries) > 0)
-                                                <a href="{{ route('product.pictures', $product->slug) }}" 
-                                                   class="card-text text-black-50 vertical-card form-placeholder fw-bold text-decoration-underline mb-2">
-                                                   View Photos ({{ count($product->galleries) }})
-                                                </a>
-                                            @endif
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <h6 class="card-text fw-bolder text-black product-font  mt-1 mb-1">
-                                                    {{ ucfirst($product->name) }}
-                                                </h6>
-                                            </a>
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <p class="card-text fw-semibold product-price mt-0 mb-2" style='color: #737373;'>
-                                                    {!! env('CURRENCY', 'PKR') . ' ' . number_format($product->original_price) !!}
-                                                </p>
-                                            </a>
-
-                                            <a href="{{ route('compare-page', ['from' => $product->slug]) }}" class="btn btn-custom rounded-1 font-sm px-md-3 px-3 fw-medium mt-0">
-                                                Compare <i class="ms-1 fa-solid fa-plus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach --}}
-                            @foreach ($upcoming_products as $product)
-                                <div class="carousel-slide custom-slider-item py-1">
-                                    <div class="card rounded-0 pt-2 px-md-0 px-0 px-lg-0 px-xl-0 border-secondary border-opacity-25 card-shadow position-relative">
-                                        
-                                        {{-- Badge: Updated x time ago --}}
-                                        @if ($product->updated_at)
-                                            <div class="position-absolute top-0 start-0 bg-dark text-white small px-2 py-1 mt-4 rounded" style="z-index: 10;">
-                                                Updated {{ $product->updated_at->diffForHumans(now(), true) . ' ago' }}
-                                            </div>
-                                        @endif
-
-                                        @if ($product->image && file_exists(public_path('uploads/products/' . $product->image)))
-                                            <a href="{{ route('product.details', $product->slug) }}" class='text-decoration-none'>
-                                                <img class="card-img-top px-md-5 px-lg-4 px-3 pt-2 prod-img  lazy"
-                                                     src="{{ asset('uploads/products/' . $product->image) }}" alt="{{ $product->alt_image }}" width='4vw'>
-                                            </a>
-                                        @else
-                                            <img class="card-img-top px-md-5 px-3 pt-2  lazy"
-                                                 src="https://via.placeholder.com/300x100.png?text=No+Image"
-                                                 alt="placeholder image">
-                                        @endif
-
-                                        <div class="card-body text-center px-0 ">
-                                            @if (@$product->galleries && count($product->galleries) > 0)
-                                                <a href="{{ route('product.pictures', $product->slug) }}" 
-                                                   class="card-text text-black-50 vertical-card form-placeholder fw-bold text-decoration-underline mb-2">
-                                                   View Photos ({{ count($product->galleries) }})
-                                                </a>
-                                            @endif
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <h6 class="card-text fw-bolder text-black product-font  mt-1 mb-1">
-                                                    {{ ucfirst($product->name) }}
-                                                </h6>
-                                            </a>
-
-                                            <a href="{{ route('product.details', $product->slug) }}" class="text-decoration-none">
-                                                <p class="card-text fw-semibold product-price mt-0 mb-2" style='color: #737373;'>
-                                                    {!! env('CURRENCY', 'PKR') . ' ' . number_format($product->original_price) !!}
-                                                </p>
-                                            </a>
-
-                                            <a href="{{ route('compare-page', ['from' => $product->slug]) }}" class="btn btn-custom rounded-1 font-sm px-md-3 px-3 fw-medium mt-0">
-                                                Compare <i class="ms-1 fa-solid fa-plus"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                            <div class="carousel-scrollbar">
-                                <div class="scrollbar-thumb"></div>
-                            </div>
-
-                        </div>
-                        <!-- Controls -->
-                        <button
-                            class="custom-slider-control custom-slider-control-prev text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="prev3">
-                            <p style='position:relative;top: -11px;'>&lt;</p>
-                        </button>
-                        <button
-                            class="custom-slider-control custom-slider-control-next text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="next3">
-                            <p style='position:relative;top: -11px;'>&gt;</p>
-                        </button>
+                    <div class="card-content">
+                      <h6>UI/UX Design</h6>
+                      <span>1,890 Students</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
+                  </div>
 
-<style>
-    .web-card {
-        border-radius: 8px;
-        overflow: hidden;
-        transition: transform 0.3s ease-in-out;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .web-card img {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-    }
-
-    .web-card-body {
-        padding: 12px;
-        background: white;
-        color: #181818;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .web-card-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .web-card-text {
-        flex: 1;
-    }
-
-    .web-card-title {
-        font-size: 1.2rem;
-        font-weight: bold;
-        margin-bottom: 4px;
-    }
-
-    .web-card-date {
-        font-size: 11px;
-        color: rgba(0, 0, 0, 0.5);
-    }
-
-    .web-share-icon {
-        font-size: 1rem;
-        color: rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-        margin-left: 12px;
-    }
-
-    .web-share-icon i {
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 50%;
-        padding: 8px;
-    }
-
-    @media screen and (max-width: 768px) {
-        .web-card img {
-            height: 150px;
-        }
-
-        .web-card-title {
-            font-size: 0.9rem;
-        }
-
-        .web-card-date {
-            font-size: 10px;
-        }
-
-        .web-share-icon {
-            font-size: 0.8rem;
-        }
-
-        .web-share-icon i {
-            padding: 6px;
-        }
-    }
-</style>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-@if (@$web_story_categories && count($web_story_categories) > 0)
-<div class="container py-md-0 py-1 pb-0 overflow-hidden" style='width:100vw'>
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-12">
-            <div class="row py-4 px-0">
-                <h5 class='fw-bold px-2 pt-1 border-start border-danger border-4 mx-3 heading'>Web Stories</h5>
-                <div class="container py-4">
-                    <div class="custom-slider-container">
-                        <div class="custom-slider-wrapper carousel-wrapper" id="sliderWrapper4">
-                            @foreach ($web_story_categories as $category)
-                                <div class="carousel-slide custom-slider-item py-1">
-                                    {{-- @foreach ($web_story_categories as $category) --}}
-                                    
-                                        <a href="{{ route('web-story.detail', $category->slug) }}" class="text-decoration-none">
-                                            <div class="web-card mb-0 pb-0">
-                                                <img src="{{ asset('uploads/web-stories/' . $category->image) }}"
-                                                    alt="{{ $category->title }}" class=" lazy">
-                                                <div class="web-card-body">
-                                                    <div class="web-card-content">
-                                                        <div class="web-card-text">
-                                                            <h6 class="web-card-title fw-bolder">{{ ucfirst($category->title) }}</h6>
-                                                            <p class="web-card-date fw-bold mb-0">
-                                                                {{ date('M d, Y', strtotime($category->created_at)) }}
-                                                            </p>
-                                                        </div>
-                                                        <span class="web-share-icon"
-                                                            onclick="shareStory(event, '{{ route('web-story.detail', $category->slug) }}')">
-                                                            <i class="fa-solid fa-share-nodes"></i>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    
-                                {{-- @endforeach --}}
-                                </div>
-                            @endforeach
-                            <script>
-                                function shareStory(event, url) {
-                                    event.preventDefault();
-                                    if (navigator.share) {
-                                        navigator.share({
-                                            title: 'Web Story',
-                                            url: url
-                                        }).catch(console.error);
-                                    } else {
-                                        alert('Sharing not supported on this browser.');
-                                    }
-                                }
-                            </script>
-                        
-                            <div class="carousel-scrollbar">
-                                <div class="scrollbar-thumb"></div>
-                            </div>
-
-                        </div>
-                        <!-- Controls -->
-                        <button
-                            class="custom-slider-control custom-slider-control-prev text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="prev4">
-                            <p style='position:relative;top: -11px;'>&lt;</p>
-                        </button>
-                        <button
-                            class="custom-slider-control custom-slider-control-next text-black bg-light border-1 border-dark fs-1 pb-1 d-none d-md-block"
-                            id="next4">
-                            <p style='position:relative;top: -11px;'>&gt;</p>
-                        </button>
+                  <div class="course-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="card-icon">
+                      <i class="bi bi-graph-up"></i>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
-
-<!-- Tech news -->
-@if (@$blogs && count($blogs) > 0)
-<div class="container py-md-0 py-0 overflow-hidden">
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-12">
-            <div class="row pb-4 pt-3 px-2">
-                <h5 class='fw-bold px-2 pt-1 pb-2 border-start border-danger border-4 heading'>Tech News
-                </h5>
-            </div>
-            <div class="row pb-3 g-3 pt-4">
-                @foreach ($blogs as $blog)
-                <div class="col-12 col-md-6 mt-0">
-                    <div class="card mb-3 rounded-0 py-md-3 pt-1 px-md-4 px-lg-2 px-4 card-shadow tech-h">
-                        <a href="{{ route('blog-details', $blog->slug) }}" class="row g-0 align-items-center text-decoration-none text-dark">
-                            <div class="col-5 d-flex flex-column justify-content-center align-items-center">
-                                <div class="w-100 h-100 d-flex justify-content-center">
-                                    @if ($blog->image && file_exists(public_path('uploads/blogs/' .
-                                    $blog->image)))
-                                    <img class="img-fluid rounded-0 object-fit-contain tech-img" height='100'
-                                        width='100' src="{{ asset('uploads/blogs/' . $blog->image) }}" alt="{{ $blog->alt_image }}">
-                                    @else
-                                    <img class="img-fluid rounded-0 object-fit-cover  tech-img"
-                                        src="https://via.placeholder.com/300x100.png?text=No+Image"
-                                        alt="placeholder image">
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="card-body ps-xl-0 pe-lg-5">
-                                    <h6 class="card-title fw-bold ">
-                                        {{ Str::limit($blog->name, 40, '...') }}
-                                    </h6>
-                                    <!-- <p class="card-text mt-0 tech-font">
-                                        <small class="text-danger fw-bold text-decoration-underline"
-                                            style="position:relative;top: -4px;">
-                                            <a href="javascript:void(0)">Read More</a>
-                                        </small>
-                                    </p> -->
-                                </div>
-                            </div>
-                        </a>
+                    <div class="card-content">
+                      <h6>Digital Marketing</h6>
+                      <span>3,200 Students</span>
                     </div>
+                  </div>
                 </div>
-                @endforeach
-
+              </div>
             </div>
+
+          </div>
         </div>
-    </div>
-</div>
-@endif
+      </div>
 
-<!-- Mobile comparisons -->
-<div class="container pt-1 pb-md-5 mb-md-5 mb-0 pb-4 overflow-hidden">
-    <div class="row justify-content-center">
-        <div class="col-md-12 col-lg-12">
-            <div class="row py-4 px-2">
-                <h5 class='fw-bold px-2 pt-1 border-start border-danger border-4 heading'>
-                    Mobile Comparisons For You</h5>
-            </div>
-            <div class="row g-3 mt-2">
-                @for ($i = 0; $i < count($comparing_products); $i += 2)
-                <a href="{{ 
-                        route('compare-page', [
-                            'from' => $comparing_products[$i]->slug ?? '',
-                            'to' => $comparing_products[$i+1]->slug ?? ''
-                        ]) 
-                    }}" class="col-12 col-md-6 mt-0 text-decoration-none text-dark">
-                    <div class="card card-shadow mb-3 rounded-0">
-                        <div class="card-body d-flex align-items-center px-0">
-                            <div class="d-flex align-items-center ps-2" style='width:45%'>
-                                @if ($comparing_products[$i]->image && file_exists(public_path('uploads/products/' . $comparing_products[$i]->image)))
-                                    <img class="img-fluid img-compare lazy" src="{{ asset('uploads/products/' . $comparing_products[$i]->image) }}" alt="{{ $comparing_products[$i]->alt_image }}">
-                                @else
-                                    <img class="img-fluid img-compare lazy" src="https://via.placeholder.com/300x100.png?text=No+Image" alt="placeholder image">
-                                @endif
-                                <div class="ms-2 d-md-block d-flex justify-content-center align-items-center">
-                                    <h6 class="fw-bold mb-2 form-placeholder    w-md-100 text-dark">
-                                        {{ ucfirst($comparing_products[$i]->name) }}
-                                    </h6>
-                                    <p class="mb-0 fw-bold text-black-50 font-comp d-none d-md-block">
-                                        {{ env('CURRENCY', 'PKR') . ' ' . number_format($comparing_products[$i]->original_price) }}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="mx-0 mx-md-2 ms-3 me-3" style='width:10%'>
-                                <span class=" btn-custom d-flex justify-content-center align-items-center rounded-circle vs">VS</span>
-                            </div>
-                            <div class="d-flex align-items-center justify-content-start ps-2 ps-xl-4" style='width:45%'>
-                                @if ($comparing_products[$i+1]->image && file_exists(public_path('uploads/products/' . $comparing_products[$i+1]->image)))
-                                    <img class="img-fluid img-compare" src="{{ asset('uploads/products/' . $comparing_products[$i+1]->image) }}" alt="{{ $comparing_products[$i+1]->alt_image }}">
-                                @else
-                                    <img class="img-fluid img-compare" src="https://via.placeholder.com/300x100.png?text=No+Image" alt="placeholder image">
-                                @endif
-                                <div class="ms-2 d-md-block d-flex justify-content-center align-items-center">
-                                    <h6 class="fw-bold mb-2 form-placeholder w-md-100">
-                                        {{ ucfirst($comparing_products[$i+1]->name) }}
-                                    </h6>
-                                    <p class="mb-0 fw-bold text-black-50 form-placeholder  d-none d-md-block">
-                                        {{ env('CURRENCY', 'PKR') . ' ' . number_format($comparing_products[$i+1]->original_price) }}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                @endfor
-            </div>
+      <div class="hero-background">
+        <div class="bg-shapes">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
         </div>
-    </div>
-</div>
-@endsection
+      </div>
 
-@section('script-js')
-<!-- products slider -->
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.body.classList.add("loading");
+    </section><!-- /Courses Hero Section -->
 
-        const sliders = [{
-                wrapper: document.querySelector("#sliderWrapper1"),
-                prevBtn: document.querySelector("#prev1"),
-                nextBtn: document.querySelector("#next1"),
-                scrollbar: document.querySelector("#sliderWrapper1 .carousel-scrollbar"),
-                thumb: document.querySelector("#sliderWrapper1 .scrollbar-thumb"),
-            },
-            {
-                wrapper: document.querySelector("#sliderWrapper2"),
-                prevBtn: document.querySelector("#prev2"),
-                nextBtn: document.querySelector("#next2"),
-                scrollbar: document.querySelector("#sliderWrapper2 .carousel-scrollbar"),
-                thumb: document.querySelector("#sliderWrapper2 .scrollbar-thumb"),
-            },
-            {
-                wrapper: document.querySelector("#sliderWrapper3"),
-                prevBtn: document.querySelector("#prev3"),
-                nextBtn: document.querySelector("#next3"),
-                scrollbar: document.querySelector("#sliderWrapper3 .carousel-scrollbar"),
-                thumb: document.querySelector("#sliderWrapper3 .scrollbar-thumb"),
-            },
-            {
-                wrapper: document.querySelector("#sliderWrapper4"),
-                prevBtn: document.querySelector("#prev4"),
-                nextBtn: document.querySelector("#next4"),
-                scrollbar: document.querySelector("#sliderWrapper4 .carousel-scrollbar"),
-                thumb: document.querySelector("#sliderWrapper4 .scrollbar-thumb"),
-            }
-        ];
+    <!-- Featured Courses Section -->
+    <section id="featured-courses" class="featured-courses section">
 
-        sliders.forEach((slider) => {
-            const {
-                wrapper,
-                prevBtn,
-                nextBtn,
-                scrollbar,
-                thumb
-            } = slider;
-            const slides = wrapper.querySelectorAll(".carousel-slide");
-            const slideWidth = 144 + 8; // Slide width including margin
-            let maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Featured Courses</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
 
-            const resizeScrollbarThumb = () => {
-                thumb.style.width =
-                    `${(wrapper.clientWidth / wrapper.scrollWidth) * 100}%`;
-            };
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-            const positionScrollbarThumb = () => {
-                const scrollPositionX = wrapper.scrollLeft;
-                const thumbPositionX = (scrollPositionX / maxScroll) * (scrollbar
-                    .clientWidth - thumb.offsetWidth);
-                thumb.style.left = `${thumbPositionX}px`;
-            };
+        <div class="row gy-4">
 
-            const hideShowSliderNavButtons = () => {
-                document.body.classList.toggle(
-                    `slider-start-${wrapper.id}`,
-                    wrapper.scrollLeft <= 0
-                );
-                document.body.classList.toggle(
-                    `slider-end-${wrapper.id}`,
-                    wrapper.scrollLeft + wrapper.offsetWidth >= wrapper.scrollWidth
-                );
-            };
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="course-card">
+              <div class="course-image">
+                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge featured">Featured</div>
+                <div class="price-badge">$149</div>
+              </div>
+              <div class="course-content">
+                <div class="course-meta">
+                  <span class="level">Beginner</span>
+                  <span class="duration">8 Weeks</span>
+                </div>
+                <h3><a href="#">Digital Marketing Fundamentals</a></h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
+                <div class="instructor">
+                  <img src="{{ asset('assets/front/img/person/person-f-3.webp') }}" alt="Instructor" class="instructor-img">
+                  <div class="instructor-info">
+                    <h6>Sarah Johnson</h6>
+                    <span>Marketing Expert</span>
+                  </div>
+                </div>
+                <div class="course-stats">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <span>(4.5)</span>
+                  </div>
+                  <div class="students">
+                    <i class="bi bi-people-fill"></i>
+                    <span>342 students</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Enroll Now</a>
+              </div>
+            </div>
+          </div><!-- End Course Item -->
 
-            wrapper.addEventListener("scroll", () => {
-                hideShowSliderNavButtons();
-                positionScrollbarThumb();
-            });
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="course-card">
+              <div class="course-image">
+                <img src="{{ asset('assets/front/img/education/campus-4.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge new">New</div>
+                <div class="price-badge">$89</div>
+              </div>
+              <div class="course-content">
+                <div class="course-meta">
+                  <span class="level">Intermediate</span>
+                  <span class="duration">6 Weeks</span>
+                </div>
+                <h3><a href="#">Web Development with JavaScript</a></h3>
+                <p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
+                <div class="instructor">
+                  <img src="{{ asset('assets/front/img/person/person-m-5.webp') }}" alt="Instructor" class="instructor-img">
+                  <div class="instructor-info">
+                    <h6>Michael Chen</h6>
+                    <span>Full Stack Developer</span>
+                  </div>
+                </div>
+                <div class="course-stats">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <span>(5.0)</span>
+                  </div>
+                  <div class="students">
+                    <i class="bi bi-people-fill"></i>
+                    <span>156 students</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Enroll Now</a>
+              </div>
+            </div>
+          </div><!-- End Course Item -->
 
-            hideShowSliderNavButtons();
-            resizeScrollbarThumb();
-            positionScrollbarThumb();
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="course-card">
+              <div class="course-image">
+                <img src="{{ asset('assets/front/img/education/students-7.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge certificate">Certificate</div>
+                <div class="price-badge">Free</div>
+              </div>
+              <div class="course-content">
+                <div class="course-meta">
+                  <span class="level">Beginner</span>
+                  <span class="duration">4 Weeks</span>
+                </div>
+                <h3><a href="#">Introduction to Data Science</a></h3>
+                <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed ut perspiciatis unde omnis.</p>
+                <div class="instructor">
+                  <img src="{{ asset('assets/front/img/person/person-f-7.webp') }}" alt="Instructor" class="instructor-img">
+                  <div class="instructor-info">
+                    <h6>Dr. Emily Watson</h6>
+                    <span>Data Scientist</span>
+                  </div>
+                </div>
+                <div class="course-stats">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <span>(4.2)</span>
+                  </div>
+                  <div class="students">
+                    <i class="bi bi-people-fill"></i>
+                    <span>789 students</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Enroll Now</a>
+              </div>
+            </div>
+          </div><!-- End Course Item -->
 
-            if (prevBtn && nextBtn) {
-                prevBtn.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    wrapper.scrollTo({
-                        left: wrapper.scrollLeft - slideWidth,
-                        behavior: 'smooth'
-                    });
-                });
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="course-card">
+              <div class="course-image">
+                <img src="{{ asset('assets/front/img/education/education-5.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge popular">Popular</div>
+                <div class="price-badge">$199</div>
+              </div>
+              <div class="course-content">
+                <div class="course-meta">
+                  <span class="level">Advanced</span>
+                  <span class="duration">12 Weeks</span>
+                </div>
+                <h3><a href="#">Business Strategy &amp; Leadership</a></h3>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam eaque ipsa quae ab illo.</p>
+                <div class="instructor">
+                  <img src="{{ asset('assets/front/img/person/person-m-8.webp') }}" alt="Instructor" class="instructor-img">
+                  <div class="instructor-info">
+                    <h6>Robert Anderson</h6>
+                    <span>Business Consultant</span>
+                  </div>
+                </div>
+                <div class="course-stats">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <span>(4.7)</span>
+                  </div>
+                  <div class="students">
+                    <i class="bi bi-people-fill"></i>
+                    <span>234 students</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Enroll Now</a>
+              </div>
+            </div>
+          </div><!-- End Course Item -->
 
-                nextBtn.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    wrapper.scrollTo({
-                        left: wrapper.scrollLeft + slideWidth,
-                        behavior: 'smooth'
-                    });
-                });
-            }
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="course-card">
+              <div class="course-image">
+                <img src="{{ asset('assets/front/img/education/activities-3.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge certificate">Certificate</div>
+                <div class="price-badge">$129</div>
+              </div>
+              <div class="course-content">
+                <div class="course-meta">
+                  <span class="level">Intermediate</span>
+                  <span class="duration">10 Weeks</span>
+                </div>
+                <h3><a href="#">Graphic Design Masterclass</a></h3>
+                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui ratione voluptatem.</p>
+                <div class="instructor">
+                  <img src="{{ asset('assets/front/img/person/person-f-12.webp') }}" alt="Instructor" class="instructor-img">
+                  <div class="instructor-info">
+                    <h6>Lisa Martinez</h6>
+                    <span>Creative Director</span>
+                  </div>
+                </div>
+                <div class="course-stats">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star"></i>
+                    <span>(4.3)</span>
+                  </div>
+                  <div class="students">
+                    <i class="bi bi-people-fill"></i>
+                    <span>467 students</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Enroll Now</a>
+              </div>
+            </div>
+          </div><!-- End Course Item -->
 
-            if (thumb) {
-                let startX, thumbPosition, isMouseDown = false;
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="course-card">
+              <div class="course-image">
+                <img src="{{ asset('assets/front/img/education/teacher-6.webp') }}" alt="Course" class="img-fluid">
+                <div class="badge new">New</div>
+                <div class="price-badge">$99</div>
+              </div>
+              <div class="course-content">
+                <div class="course-meta">
+                  <span class="level">Beginner</span>
+                  <span class="duration">5 Weeks</span>
+                </div>
+                <h3><a href="#">Photography for Beginners</a></h3>
+                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas.</p>
+                <div class="instructor">
+                  <img src="{{ asset('assets/front/img/person/person-m-11.webp') }}" alt="Instructor" class="instructor-img">
+                  <div class="instructor-info">
+                    <h6>James Wilson</h6>
+                    <span>Professional Photographer</span>
+                  </div>
+                </div>
+                <div class="course-stats">
+                  <div class="rating">
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-fill"></i>
+                    <i class="bi bi-star-half"></i>
+                    <span>(4.6)</span>
+                  </div>
+                  <div class="students">
+                    <i class="bi bi-people-fill"></i>
+                    <span>298 students</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Enroll Now</a>
+              </div>
+            </div>
+          </div><!-- End Course Item -->
 
-                thumb.addEventListener("mousedown", (event) => {
-                    event.preventDefault();
-                    isMouseDown = true;
-                    thumb.classList.add("dragging");
-                    wrapper.classList.add("dragging");
-                    startX = event.clientX;
-                    thumbPosition = event.target.offsetLeft;
-                });
+        </div>
 
-                document.addEventListener("mousemove", (event) => {
-                    if (!isMouseDown) return;
-                    event.preventDefault();
-                    const deltaX = event.clientX - startX;
-                    const newThumbPosition = thumbPosition + deltaX;
-                    const maxThumbPosition = scrollbar.getBoundingClientRect()
-                        .width - thumb.offsetWidth;
-                    const thumbPositionX = Math.max(0, Math.min(maxThumbPosition,
-                        newThumbPosition));
-                    const sliderScrollLeft = (thumbPositionX / maxThumbPosition) *
-                        maxScroll;
-                    thumb.style.left = `${thumbPositionX}px`;
-                    wrapper.scrollLeft = sliderScrollLeft;
-                });
+        <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
+          <a href="courses.html" class="btn-more">View All Courses</a>
+        </div>
 
-                document.addEventListener("mouseup", (event) => {
-                    event.preventDefault();
-                    isMouseDown = false;
-                    thumb.classList.remove("dragging");
-                    wrapper.classList.remove("dragging");
-                });
-            }
+      </div>
 
-            window.onresize = () => {
-                maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-                resizeScrollbarThumb();
-                positionScrollbarThumb();
-            };
-        });
+    </section><!-- /Featured Courses Section -->
 
-        window.onload = function() {
-            if (document.body.classList.contains("loading")) {
-                document.body.classList.add("loaded");
-            } else {
-                setTimeout(() => {
-                    document.body.classList.add("loaded");
-                }, 1000);
-            }
-        };
-    });
-</script>
+    <!-- Course Categories Section -->
+    <section id="course-categories" class="course-categories section">
 
-<!-- price range slider -->
-<script>
-    window.onload = function() {
-        updateSliderValues();
-    };
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Course Categories</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
 
-    // References to slider elements
-    let sliderOne = document.getElementById("slider-1");
-    let sliderTwo = document.getElementById("slider-2");
-    let displayValOne = document.getElementById("range1");
-    let displayValTwo = document.getElementById("range2");
-    let sliderTrack = document.querySelector(".slider-track");
-    let minGap = 00;
-    let sliderMaxValue = 1000000; // Set max value to 1,000,000
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-    function updateSliderValues() {
-        // Ensure sliders respect minGap constraint
-        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-            sliderOne.value = parseInt(sliderTwo.value) - minGap;
-        }
-        if (parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap) {
-            sliderTwo.value = parseInt(sliderOne.value) + minGap;
-        }
-        displayValOne.value = sliderOne.value;
-        displayValTwo.value = sliderTwo.value;
-        fillColor();
-    }
+        <div class="row g-4">
 
-    function fillColor() {
-        let percent1 = (sliderOne.value / sliderMaxValue) * 100;
-        let percent2 = (sliderTwo.value / sliderMaxValue) * 100;
-        sliderTrack.style.background =
-            `linear-gradient(to right, #dadae5 ${percent1}% , #3264fe ${percent1}% , #3264fe ${percent2}%, #dadae5 ${percent2}%)`;
-    }
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+            <a href="courses.html" class="category-card category-tech">
+              <div class="category-icon">
+                <i class="bi bi-laptop"></i>
+              </div>
+              <h5>Computer Science</h5>
+              <span class="course-count">24 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
 
-    // Handle slider movements
-    sliderOne.addEventListener('input', function() {
-        if (parseInt(sliderOne.value) >= parseInt(sliderTwo.value) - minGap) {
-            sliderOne.value = parseInt(sliderTwo.value) - minGap;
-        }
-        displayValOne.value = sliderOne.value;
-        fillColor();
-    });
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="150">
+            <a href="courses.html" class="category-card category-business">
+              <div class="category-icon">
+                <i class="bi bi-briefcase"></i>
+              </div>
+              <h5>Business</h5>
+              <span class="course-count">18 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
 
-    sliderTwo.addEventListener('input', function() {
-        if (parseInt(sliderTwo.value) <= parseInt(sliderOne.value) + minGap) {
-            sliderTwo.value = parseInt(sliderOne.value) + minGap;
-        }
-        displayValTwo.value = sliderTwo.value;
-        fillColor();
-    });
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+            <a href="courses.html" class="category-card category-design">
+              <div class="category-icon">
+                <i class="bi bi-palette"></i>
+              </div>
+              <h5>Design</h5>
+              <span class="course-count">15 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
 
-    // Update slider values on input change
-    displayValOne.addEventListener('input', function() {
-        let value = parseInt(displayValOne.value) || 0; // Default to 0 if NaN
-        if (value < 0) {
-            value = 0;
-        } else if (value > sliderMaxValue) {
-            value = sliderMaxValue;
-        }
-        if (value >= parseInt(displayValTwo.value) - minGap) {
-            value = parseInt(displayValTwo.value) - minGap;
-        }
-        displayValOne.value = value;
-        sliderOne.value = value;
-        fillColor();
-    });
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="250">
+            <a href="courses.html" class="category-card category-health">
+              <div class="category-icon">
+                <i class="bi bi-heart-pulse"></i>
+              </div>
+              <h5>Health &amp; Medical</h5>
+              <span class="course-count">12 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
 
-    displayValTwo.addEventListener('input', function() {
-        let value = parseInt(displayValTwo.value) || 0; // Default to 0 if NaN
-        if (value < 0) {
-            value = 0;
-        } else if (value > sliderMaxValue) {
-            value = sliderMaxValue;
-        }
-        if (value <= parseInt(displayValOne.value) + minGap) {
-            value = parseInt(displayValOne.value) + minGap;
-        }
-        displayValTwo.value = value;
-        sliderTwo.value = value;
-        fillColor();
-    });
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+            <a href="courses.html" class="category-card category-language">
+              <div class="category-icon">
+                <i class="bi bi-globe"></i>
+              </div>
+              <h5>Languages</h5>
+              <span class="course-count">21 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
 
-    // Ensure the z-index is managed for dragging
-    sliderOne.addEventListener('mousedown', () => {
-        sliderOne.style.zIndex = 2;
-        sliderTwo.style.zIndex = 1;
-    });
-    sliderTwo.addEventListener('mousedown', () => {
-        sliderTwo.style.zIndex = 2;
-        sliderOne.style.zIndex = 1;
-    });
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="350">
+            <a href="courses.html" class="category-card category-science">
+              <div class="category-icon">
+                <i class="bi bi-diagram-3"></i>
+              </div>
+              <h5>Science</h5>
+              <span class="course-count">16 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
 
-    // Reset z-index on mouseup
-    document.addEventListener('mouseup', () => {
-        sliderOne.style.zIndex = 1;
-        sliderTwo.style.zIndex = 1;
-    });
-</script>
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+            <a href="courses.html" class="category-card category-marketing">
+              <div class="category-icon">
+                <i class="bi bi-megaphone"></i>
+              </div>
+              <h5>Marketing</h5>
+              <span class="course-count">19 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="150">
+            <a href="courses.html" class="category-card category-finance">
+              <div class="category-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <h5>Finance</h5>
+              <span class="course-count">14 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+            <a href="courses.html" class="category-card category-photography">
+              <div class="category-icon">
+                <i class="bi bi-camera"></i>
+              </div>
+              <h5>Photography</h5>
+              <span class="course-count">11 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="250">
+            <a href="courses.html" class="category-card category-music">
+              <div class="category-icon">
+                <i class="bi bi-music-note-beamed"></i>
+              </div>
+              <h5>Music</h5>
+              <span class="course-count">13 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+            <a href="courses.html" class="category-card category-engineering">
+              <div class="category-icon">
+                <i class="bi bi-gear"></i>
+              </div>
+              <h5>Engineering</h5>
+              <span class="course-count">22 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="350">
+            <a href="courses.html" class="category-card category-law">
+              <div class="category-icon">
+                <i class="bi bi-journal-text"></i>
+              </div>
+              <h5>Law &amp; Legal</h5>
+              <span class="course-count">9 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="100">
+            <a href="courses.html" class="category-card category-culinary">
+              <div class="category-icon">
+                <i class="bi bi-cup-hot"></i>
+              </div>
+              <h5>Culinary Arts</h5>
+              <span class="course-count">8 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="150">
+            <a href="courses.html" class="category-card category-sports">
+              <div class="category-icon">
+                <i class="bi bi-trophy"></i>
+              </div>
+              <h5>Sports &amp; Fitness</h5>
+              <span class="course-count">17 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="200">
+            <a href="courses.html" class="category-card category-writing">
+              <div class="category-icon">
+                <i class="bi bi-pen"></i>
+              </div>
+              <h5>Writing</h5>
+              <span class="course-count">10 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="250">
+            <a href="courses.html" class="category-card category-psychology">
+              <div class="category-icon">
+                <i class="bi bi-body-text"></i>
+              </div>
+              <h5>Psychology</h5>
+              <span class="course-count">12 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="300">
+            <a href="courses.html" class="category-card category-environment">
+              <div class="category-icon">
+                <i class="bi bi-tree"></i>
+              </div>
+              <h5>Environment</h5>
+              <span class="course-count">7 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+          <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" data-aos="zoom-in" data-aos-delay="350">
+            <a href="courses.html" class="category-card category-communication">
+              <div class="category-icon">
+                <i class="bi bi-chat-dots"></i>
+              </div>
+              <h5>Communication</h5>
+              <span class="course-count">15 Courses</span>
+            </a>
+          </div><!-- End Category Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Course Categories Section -->
+
+    <!-- Cta Section -->
+    <section id="cta" class="cta section light-background">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row align-items-center">
+
+          <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
+            <div class="cta-content">
+              <h2>Transform Your Future with Expert-Led Online Courses</h2>
+              <p>Join thousands of successful learners who have advanced their careers through our comprehensive online education platform.</p>
+
+              <div class="features-list">
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>20+ Expert instructors with industry experience</span>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="350">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Certificate of completion for every course</span>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>24/7 access to course materials and resources</span>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="450">
+                  <i class="bi bi-check-circle-fill"></i>
+                  <span>Interactive assignments and real-world projects</span>
+                </div>
+              </div>
+
+              <div class="cta-actions" data-aos="fade-up" data-aos-delay="500">
+                <a href="courses.html" class="btn btn-primary">Browse Courses</a>
+                <a href="enroll.html" class="btn btn-outline">Enroll Now</a>
+              </div>
+
+              <div class="stats-row" data-aos="fade-up" data-aos-delay="400">
+                <div class="stat-item">
+                  <h3><span data-purecounter-start="0" data-purecounter-end="15000" data-purecounter-duration="2" class="purecounter"></span>+</h3>
+                  <p>Students Enrolled</p>
+                </div>
+                <div class="stat-item">
+                  <h3><span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="2" class="purecounter"></span>+</h3>
+                  <p>Courses Available</p>
+                </div>
+                <div class="stat-item">
+                  <h3><span data-purecounter-start="0" data-purecounter-end="98" data-purecounter-duration="2" class="purecounter"></span>%</h3>
+                  <p>Success Rate</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6" data-aos="fade-left" data-aos-delay="300">
+            <div class="cta-image">
+              <img src="{{ asset('assets/front/img/education/courses-4.webp') }}" alt="Online Learning Platform" class="img-fluid">
+              <div class="floating-element student-card" data-aos="zoom-in" data-aos-delay="600">
+                <div class="card-content">
+                  <i class="bi bi-person-check-fill"></i>
+                  <div class="text">
+                    <span class="number">2,450</span>
+                    <span class="label">New Students This Month</span>
+                  </div>
+                </div>
+              </div>
+              <div class="floating-element course-card" data-aos="zoom-in" data-aos-delay="700">
+                <div class="card-content">
+                  <i class="bi bi-play-circle-fill"></i>
+                  <div class="text">
+                    <span class="number">50+</span>
+                    <span class="label">Hours of Content</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Cta Section -->
 @endsection
