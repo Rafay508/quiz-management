@@ -47,4 +47,9 @@ class HomeController extends Controller
     {
         return view('front.index');
     }
+
+    public function quizIndex()
+    {
+        return view('front.quizzes');
+    }
 }
