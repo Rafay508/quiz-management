@@ -1,6 +1,19 @@
 @extends('front.layouts.app')
 @section('title', 'QuizMaster - Online Quiz Management & Assessment Platform')
 
+@section('css')
+<style>
+  .course-stats .stat i {
+    color: #136ad5;
+  }
+
+  .course-stats .stat {
+    font-size: 13px;
+    color: color-mix(in srgb, var(--default-color), transparent 30%);
+  }
+</style>
+@endsection
+
 @section('content')
     <!-- Courses Hero Section -->
     <section id="courses-hero" class="courses-hero section light-background">
@@ -127,12 +140,22 @@
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Duration: 60 Minutes</span>
-                  <span class="duration">60 Questions</span>
+                  <span class="level">Programming</span>
+                  <span class="duration">Begginer</span>
                 </div>
                 <h3><a href="#">Digital Marketing Fundamentals</a></h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <a href="enroll.html" class="btn-course">Enroll Now</a>
+                <div class="course-stats">
+                  <div class="stat">
+                    <i class="bi bi-clock"></i>
+                    <span>60 Minutes</span>
+                  </div>
+                  <div class="stat">
+                    <i class="bi bi-people"></i>
+                    <span>1,245 Participants</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Start Quiz</a>
               </div>
             </div>
           </div><!-- End Course Item -->
@@ -146,12 +169,22 @@
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Duration: 60 Minutes</span>
-                  <span class="duration">60 Questions</span>
+                  <span class="level">Programming</span>
+                  <span class="duration">Begginer</span>
                 </div>
                 <h3><a href="#">Digital Marketing Fundamentals</a></h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <a href="enroll.html" class="btn-course">Enroll Now</a>
+                <div class="course-stats">
+                  <div class="stat">
+                    <i class="bi bi-clock"></i>
+                    <span>60 Minutes</span>
+                  </div>
+                  <div class="stat">
+                    <i class="bi bi-people"></i>
+                    <span>1,245 Participants</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Start Quiz</a>
               </div>
             </div>
           </div><!-- End Course Item -->
@@ -165,48 +198,25 @@
               </div>
               <div class="course-content">
                 <div class="course-meta">
-                  <span class="level">Duration: 60 Minutes</span>
-                  <span class="duration">60 Questions</span>
+                  <span class="level">Programming</span>
+                  <span class="duration">Begginer</span>
                 </div>
                 <h3><a href="#">Digital Marketing Fundamentals</a></h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <a href="enroll.html" class="btn-course">Enroll Now</a>
+                <div class="course-stats">
+                  <div class="stat">
+                    <i class="bi bi-clock"></i>
+                    <span>60 Minutes</span>
+                  </div>
+                  <div class="stat">
+                    <i class="bi bi-people"></i>
+                    <span>1,245 Participants</span>
+                  </div>
+                </div>
+                <a href="enroll.html" class="btn-course">Start Quiz</a>
               </div>
             </div>
           </div><!-- End Course Item -->
-
-          {{-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="course-card">
-              <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Quiz" class="img-fluid">
-                <div class="badge featured">Quiz</div>
-              </div>
-              <div class="course-content">
-                <div class="course-meta">
-                  <span class="level">60 Questions</span>
-                  <span class="duration">60 Minutes</span>
-                </div>
-                <h3><a href="#">Digital Marketing Quiz</a></h3>
-                <p>Test your knowledge of digital marketing concepts including SEO, social media, content marketing, email campaigns, and analytics. Challenge yourself and measure your expertise.</p>
-                
-                <div class="instructor">
-                  <img src="{{ asset('assets/front/img/person/person-f-3.webp') }}" alt="Quiz Creator" class="instructor-img">
-                  <div class="instructor-info">
-                    <h6>Sarah Johnson</h6>
-                    <span>Quiz Creator</span>
-                  </div>
-                </div>
-
-                  <div class="students">
-                    <i class="bi bi-people-fill"></i>
-                    <span>342 Attempts</span>
-                  </div>
-                </div>
-
-                <a href="start-quiz.html" class="btn-course">Start Quiz</a>
-              </div>
-            </div>
-          </div> --}} <!-- End Quiz Item -->
 
         </div>
 

@@ -1,6 +1,15 @@
 @extends('front.layouts.app')
 @section('title', 'QuizMaster - Online Quiz Management & Assessment Platform')
 
+@section('css')
+<style>
+  .course-stats {
+    border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+    padding-top: 15px;
+  }
+</style>
+@endsection
+
 @section('content')
     <!-- Page Title -->
     <div class="page-title light-background">
@@ -103,21 +112,6 @@
                 </div>
               </div>
 
-              <div class="filter-group">
-                <h5>Price</h5>
-                <div class="filter-options">
-                  <label class="filter-checkbox">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                    Free
-                  </label>
-                  <label class="filter-checkbox">
-                    <input type="checkbox">
-                    <span class="checkmark"></span>
-                    Paid
-                  </label>
-                </div>
-              </div>
             </div><!-- End Course Filters -->
           </div>
 
@@ -127,7 +121,7 @@
                 <i class="bi bi-search"></i>
                 <input type="text" placeholder="Search quizzes...">
               </div>
-              <div class="sort-dropdown">
+              <!-- <div class="sort-dropdown">
                 <select>
                   <option>Sort by: Most Popular</option>
                   <option>Newest First</option>
@@ -135,7 +129,7 @@
                   <option>Price: High to Low</option>
                   <option>Duration: Short to Long</option>
                 </select>
-              </div>
+              </div> -->
             </div>
 
             <div class="courses-grid" data-aos="fade-up" data-aos-delay="200">
@@ -144,7 +138,7 @@
                   <div class="course-card">
                     <div class="course-image">
                       <img src="{{ asset('assets/front/img/education/courses-3.webp') }}" alt="Course" class="img-fluid">
-                      <div class="course-badge">Best Seller</div>
+                      <!-- <div class="course-badge">Best Seller</div> -->
                     </div>
                     <div class="course-content">
                       <div class="course-meta">
@@ -163,7 +157,7 @@
                           <span>1,245 students</span>
                         </div>
                       </div>
-                      <a href="enroll.html" class="btn-course">Enroll Now</a>
+                      <a href="enroll.html" class="btn-course">Start Quiz</a>
                     </div>
                   </div><!-- End Course Card -->
                 </div>

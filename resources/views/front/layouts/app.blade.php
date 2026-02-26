@@ -34,6 +34,8 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  @yield('css')
 </head>
 
 <body class="index-page">
