@@ -46,6 +46,11 @@ class QuizController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
+        // Level filter
+        if ($request->has('level') && $request->level) {
+            $query->where('level', $request->level);
+        }
+
         $quizzes = $query->get();
         $categories = Category::where('status', 'active')->orderBy('name')->get();
 

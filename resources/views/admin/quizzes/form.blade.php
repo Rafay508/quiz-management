@@ -54,6 +54,19 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label class="form-label" for="level">Level *</label>
+                                    <select id="level" name="level" class="form-select @error('level') is-invalid @enderror" required>
+                                        <option value="">Select Level</option>
+                                        <option value="Beginner" {{ old('level', $quiz->level ?? '') == 'Beginner' ? 'selected' : '' }}>Beginner</option>
+                                        <option value="Intermediate" {{ old('level', $quiz->level ?? '') == 'Intermediate' ? 'selected' : '' }}>Intermediate</option>
+                                        <option value="Advanced" {{ old('level', $quiz->level ?? '') == 'Advanced' ? 'selected' : '' }}>Advanced</option>
+                                    </select>
+                                    @error('level')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label class="form-label" for="description">Description</label>
                                     <textarea
                                         class="form-control @error('description') is-invalid @enderror"

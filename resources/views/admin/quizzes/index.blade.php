@@ -44,6 +44,15 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Level</label>
+                            <select name="level" class="form-select">
+                                <option value="">All Levels</option>
+                                <option value="Beginner" {{ request('level') == 'Beginner' ? 'selected' : '' }}>Beginner</option>
+                                <option value="Intermediate" {{ request('level') == 'Intermediate' ? 'selected' : '' }}>Intermediate</option>
+                                <option value="Advanced" {{ request('level') == 'Advanced' ? 'selected' : '' }}>Advanced</option>
+                            </select>
+                        </div>
                         <div class="col-md-2 d-flex align-items-end">
                             <button type="submit" class="btn btn-primary me-2">Filter</button>
                             <a href="{{ route('admin.quizzes.index') }}" class="btn btn-label-secondary">Reset</a>
@@ -89,6 +98,7 @@
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Category</th>
+                                <th>Level</th>
                                 <th>Duration</th>
                                 <th>Total Marks</th>
                                 <th>Status</th>
@@ -111,6 +121,17 @@
                                     </td>
                                     <td>{{ $quiz->title }}</td>
                                     <td>{{ $quiz->category->name ?? 'N/A' }}</td>
+                                    <td>
+                                        @if($quiz->level == 'Beginner')
+                                            <span class="badge bg-label-info">Beginner</span>
+                                        @elseif($quiz->level == 'Intermediate')
+                                            <span class="badge bg-label-primary">Intermediate</span>
+                                        @elseif($quiz->level == 'Advanced')
+                                            <span class="badge bg-label-danger">Advanced</span>
+                                        @else
+                                            <span class="text-muted">N/A</span>
+                                        @endif
+                                    </td>
                                     <td>{{ $quiz->duration_minutes }} min</td>
                                     <td>{{ $quiz->total_marks }}</td>
                                     <td>
@@ -159,7 +180,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="9" class="text-center">No quizzes found.</td>
+                                    <td colspan="10" class="text-center">No quizzes found.</td>
                                 </tr>
                             @endforelse
                         </tbody>

@@ -26,6 +26,7 @@ class StoreQuizRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'category_id' => 'required|exists:categories,id',
+            'level' => 'required|in:Beginner,Intermediate,Advanced',
             'description' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'duration_minutes' => 'required|integer|min:1',

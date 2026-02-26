@@ -15,6 +15,7 @@ class Quiz extends Model
         'description',
         'image',
         'category_id',
+        'level',
         'duration_minutes',
         'total_marks',
         'pass_marks',
