@@ -131,97 +131,46 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="course-card">
-              <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge featured">Featured</div>
-                <!-- <div class="price-badge">$149</div> -->
-              </div>
-              <div class="course-content">
-                <div class="course-meta">
-                  <span class="level">Programming</span>
-                  <span class="duration">Begginer</span>
+          @if (@$featured_quizzes && count($featured_quizzes) > 0)
+          @foreach($featured_quizzes as $featured_quiz)
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="course-card">
+                <div class="course-image">
+                  <img src="{{ $featured_quiz->image }}" 
+                   alt="Quiz" 
+                   class="img-fluid"
+                   onerror="this.onerror=null; this.src='{{ asset('assets/front/img/education/courses-5.webp') }}';">
+                  <div class="badge featured">Featured</div>
+                  <!-- <div class="price-badge">$149</div> -->
                 </div>
-                <h3><a href="#">Digital Marketing Fundamentals</a></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <div class="course-stats">
-                  <div class="stat">
-                    <i class="bi bi-clock"></i>
-                    <span>60 Minutes</span>
+                <div class="course-content">
+                  <div class="course-meta">
+                    <span class="level">{{ @$featured_quiz->category->name }}</span>
+                    <span class="duration">{{ $featured_quiz->level }}</span>
                   </div>
-                  <div class="stat">
-                    <i class="bi bi-people"></i>
-                    <span>1,245 Participants</span>
+                  <h3><a href="#">{{ ucfirst($featured_quiz->title) }}</a></h3>
+                  <p>{{ ucfirst($featured_quiz->description) }}</p>
+                  <div class="course-stats">
+                    <div class="stat">
+                      <i class="bi bi-clock"></i>
+                      <span>{{ $featured_quiz->duration_minutes }} Minutes</span>
+                    </div>
+                    <div class="stat">
+                      <i class="bi bi-people"></i>
+                      <span>1,245 Participants</span>
+                    </div>
                   </div>
+                  <a href="enroll.html" class="btn-course">Start Quiz</a>
                 </div>
-                <a href="enroll.html" class="btn-course">Start Quiz</a>
               </div>
-            </div>
-          </div><!-- End Course Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="course-card">
-              <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge featured">Featured</div>
-                <!-- <div class="price-badge">$149</div> -->
-              </div>
-              <div class="course-content">
-                <div class="course-meta">
-                  <span class="level">Programming</span>
-                  <span class="duration">Begginer</span>
-                </div>
-                <h3><a href="#">Digital Marketing Fundamentals</a></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <div class="course-stats">
-                  <div class="stat">
-                    <i class="bi bi-clock"></i>
-                    <span>60 Minutes</span>
-                  </div>
-                  <div class="stat">
-                    <i class="bi bi-people"></i>
-                    <span>1,245 Participants</span>
-                  </div>
-                </div>
-                <a href="enroll.html" class="btn-course">Start Quiz</a>
-              </div>
-            </div>
-          </div><!-- End Course Item -->
-
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="course-card">
-              <div class="course-image">
-                <img src="{{ asset('assets/front/img/education/students-9.webp') }}" alt="Course" class="img-fluid">
-                <div class="badge featured">Featured</div>
-                <!-- <div class="price-badge">$149</div> -->
-              </div>
-              <div class="course-content">
-                <div class="course-meta">
-                  <span class="level">Programming</span>
-                  <span class="duration">Begginer</span>
-                </div>
-                <h3><a href="#">Digital Marketing Fundamentals</a></h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minim veniam.</p>
-                <div class="course-stats">
-                  <div class="stat">
-                    <i class="bi bi-clock"></i>
-                    <span>60 Minutes</span>
-                  </div>
-                  <div class="stat">
-                    <i class="bi bi-people"></i>
-                    <span>1,245 Participants</span>
-                  </div>
-                </div>
-                <a href="enroll.html" class="btn-course">Start Quiz</a>
-              </div>
-            </div>
-          </div><!-- End Course Item -->
+            </div><!-- End Course Item -->
+          @endforeach
+          @endif
 
         </div>
 
         <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
-          <a href="courses.html" class="btn-more">View All Quizes</a>
+          <a href="{{ route('quiz.index') }}" class="btn-more">View All Quizes</a>
         </div>
 
       </div>
