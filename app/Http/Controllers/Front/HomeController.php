@@ -31,4 +31,9 @@ class HomeController extends Controller
     {
         return view('front.quizzes');
     }
+
+    public function takeQuizIndex()
+    {
+        return view('front.take-quiz');
+    }
 }
