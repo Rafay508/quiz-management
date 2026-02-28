@@ -20,6 +20,8 @@ class CreateQuizAttemptsTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('student_id')->nullable();
+            $table->integer('total_marks')->nullable();
+            $table->integer('total_questions')->nullable();
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
             $table->enum('status', ['in_progress', 'completed', 'abandoned'])->default('in_progress');

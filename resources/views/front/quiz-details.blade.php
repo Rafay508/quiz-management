@@ -67,7 +67,7 @@
                 <h4 class="card-title mb-0">Student Information</h4>
               </div>
               <div class="card-body p-4">
-                <form id="quizDetailsForm" action="#" method="POST">
+                <form id="quizDetailsForm" action="{{ route('quiz.attempt', $quiz->id) }}" method="POST">
                   @csrf
                   
                   <div class="row mb-3">
@@ -184,42 +184,4 @@
         </div>
       </div>
     </section><!-- End Quiz Details Section -->
-@endsection
-
-@section('js')
-{{-- <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const agreeCheckbox = document.getElementById('agreeInstructions');
-    const startQuizBtn = document.getElementById('startQuizBtn');
-    const form = document.getElementById('quizDetailsForm');
-
-    // Enable/disable Start Quiz button based on checkbox
-    agreeCheckbox.addEventListener('change', function() {
-      startQuizBtn.disabled = !this.checked;
-    });
-
-    // Bootstrap form validation
-    form.addEventListener('submit', function(event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
-
-    // Real-time validation feedback
-    const inputs = form.querySelectorAll('input[required]');
-    inputs.forEach(input => {
-      input.addEventListener('blur', function() {
-        if (this.checkValidity()) {
-          this.classList.remove('is-invalid');
-          this.classList.add('is-valid');
-        } else {
-          this.classList.remove('is-valid');
-          this.classList.add('is-invalid');
-        }
-      });
-    });
-  });
-</script> --}}
 @endsection

@@ -29,8 +29,9 @@ Auth::routes();
 // home
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('quizzes', 'HomeController@quizIndex')->name('quiz.index');
-Route::get('take-quiz', 'HomeController@takeQuizIndex')->name('quiz.take');
 Route::get('quiz/details/{id}', 'HomeController@quizDetail')->name('quiz.detail');
+Route::post('quiz/attempt/{quiz_id}', 'QuizAttemptController@store')->name('quiz.attempt');
+Route::get('take-quiz/{attempt_id}', 'QuizAttemptController@show')->name('quiz.take');
 
 // product by brand
 // Route::get('/brand/{slug}', 'HomeController@productByBrand')->name('product-by.brand');

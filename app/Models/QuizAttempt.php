@@ -17,6 +17,8 @@ class QuizAttempt extends Model
         'student_id',
         'start_time',
         'end_time',
+        'total_marks',
+        'total_questions',
         'status',
         'score',
         'percentage',
