@@ -16,9 +16,10 @@ class CreateQuizAttemptsTable extends Migration
         Schema::create('quiz_attempts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('quiz_id')->constrained('quizzes')->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('guest_email')->nullable();
-            $table->string('guest_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('name')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('student_id')->nullable();
             $table->dateTime('start_time');
             $table->dateTime('end_time')->nullable();
             $table->enum('status', ['in_progress', 'completed', 'abandoned'])->default('in_progress');

@@ -11,9 +11,10 @@ class QuizAttempt extends Model
 
     protected $fillable = [
         'quiz_id',
-        'user_id',
-        'guest_email',
-        'guest_name',
+        'email',
+        'name',
+        'phone',
+        'student_id',
         'start_time',
         'end_time',
         'status',
