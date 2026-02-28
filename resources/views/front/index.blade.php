@@ -160,7 +160,7 @@
                       <span>1,245 Participants</span>
                     </div>
                   </div>
-                  <a href="enroll.html" class="btn-course">Start Quiz</a>
+                  <a href="{{ route('quiz.take') }}" class="btn-course">Start Quiz</a>
                 </div>
               </div>
             </div><!-- End Course Item -->
