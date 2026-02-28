@@ -22,7 +22,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $featured_quizzes = Quiz::inRandomOrder()->limit(3)->get();
+        $featured_quizzes = Quiz::inRandomOrder()->with('category')->limit(3)->get();
 
         return view('front.index', compact('featured_quizzes'));
     }
@@ -35,5 +35,12 @@ class HomeController extends Controller
     public function takeQuizIndex()
     {
         return view('front.take-quiz');
+    }
+
+    public function quizDetail($id)
+    {
+        $quiz = Quiz::with('category')->withCount('questions')->find($id);
+
+        return view('front.quiz-details', compact('quiz'));
     }
 }

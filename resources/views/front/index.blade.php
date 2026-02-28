@@ -160,7 +160,7 @@
                       <span>1,245 Participants</span>
                     </div>
                   </div>
-                  <a href="{{ route('quiz.take') }}" class="btn-course">Start Quiz</a>
+                  <a href="{{ route('quiz.detail', $featured_quiz->id) }}" class="btn-course">View Details</a>
                 </div>
               </div>
             </div><!-- End Course Item -->

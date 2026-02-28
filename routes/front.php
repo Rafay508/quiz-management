@@ -30,6 +30,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('quizzes', 'HomeController@quizIndex')->name('quiz.index');
 Route::get('take-quiz', 'HomeController@takeQuizIndex')->name('quiz.take');
+Route::get('quiz/details/{id}', 'HomeController@quizDetail')->name('quiz.detail');
 
 // product by brand
 // Route::get('/brand/{slug}', 'HomeController@productByBrand')->name('product-by.brand');
