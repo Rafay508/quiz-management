@@ -41,7 +41,7 @@ class QuizAttemptController extends Controller
             'phone' => $request->phone,
             'student_id' => $request->studentId,
             'status' => 'in_progress',
-            'started_at' => now(),
+            'start_time' => now(),
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
         ]);
