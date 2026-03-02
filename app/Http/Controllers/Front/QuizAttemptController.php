@@ -97,11 +97,6 @@ class QuizAttemptController extends Controller
             'answers' => 'required|array',
         ]);
 
-        // echo "<pre>";
-        // print_r($request->toArray());
-        // echo "</pre>";
-        // die();
-
         // Get attempt with quiz
         $attempt = QuizAttempt::with('quiz.questions.options')
                     ->findOrFail($attempt_id);
