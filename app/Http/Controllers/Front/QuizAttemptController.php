@@ -10,6 +10,7 @@ use App\Models\QuestionOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\UserAnswer;
 
 class QuizAttemptController extends Controller
 {
@@ -81,7 +82,13 @@ class QuizAttemptController extends Controller
         $quiz = session('quiz');
         $questions = session('questions');
 
-        return view('front.take-quiz', compact('attempt', 'quiz', 'questions'));
+        // Calculate timer data
+        $startTime = $attempt->start_time;
+        $durationMinutes = $quiz->duration_minutes;
+        $endTime = $startTime->copy()->addMinutes($durationMinutes);
+        $remainingSeconds = max(0, now()->diffInSeconds($endTime, false));
+
+        return view('front.take-quiz', compact('attempt', 'quiz', 'questions', 'startTime', 'endTime', 'remainingSeconds'));
     }
 
     public function submit(Request $request, $attempt_id)
@@ -90,10 +97,64 @@ class QuizAttemptController extends Controller
             'answers' => 'required|array',
         ]);
 
-        echo "<pre>";
-        print_r($request->toArray());
-        print_r('Attempt Id: ' . $attempt_id);
-        echo "</pre>";
-        die();
+        // echo "<pre>";
+        // print_r($request->toArray());
+        // echo "</pre>";
+        // die();
+
+        // Get attempt with quiz
+        $attempt = QuizAttempt::with('quiz.questions.options')
+                    ->findOrFail($attempt_id);
+
+        $quiz = $attempt->quiz;
+        $questions = $quiz->questions;
+
+        $totalQuestions = $questions->count();
+        $marksPerQuestion = $quiz->total_marks / $totalQuestions;
+
+        $score = 0;
+
+        foreach ($questions as $question) {
+
+            $selectedOptionId = $request->input("answers.{$question->id}");
+
+            $correctOption = QuestionOption::where('question_id', $question->id)
+                                ->where('is_correct', 1)
+                                ->first();
+
+            $isCorrect = false;
+            $marksObtained = 0;
+
+            if ($selectedOptionId && $correctOption) {
+                if ($correctOption->id == $selectedOptionId) {
+                    $isCorrect = true;
+                    $marksObtained = $marksPerQuestion;
+                    $score += $marksPerQuestion;
+                }
+            }
+
+            UserAnswer::create([
+                'quiz_attempt_id'   => $attempt_id,
+                'question_id'       => $question->id,
+                'selected_option_id'=> $selectedOptionId,
+                'is_correct'        => $isCorrect,
+                'marks_obtained'    => $marksObtained,
+            ]);
+        }
+
+        $percentage = ($score / $quiz->total_marks) * 100;
+        $isPassed = $score >= $quiz->pass_marks;
+
+        $attempt->update([
+            'status'          => 'completed',
+            'end_time'        => now(),
+            'score'           => $score,
+            'percentage'      => $percentage,
+            'is_passed'       => $isPassed,
+            'total_questions' => $totalQuestions,
+        ]);
+
+        return redirect()->route('quiz.index')
+                         ->with('success', 'Quiz submitted successfully!');
     }
 }
