@@ -87,6 +87,14 @@
             </a>
         </li>
 
+        <!-- Quiz Attempts / Results -->
+        <li class="menu-item {{ request()->segment(2) == 'quiz-attempts' ? 'active' : '' }}">
+            <a href="{{ route('admin.quiz-attempts.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-clipboard-check"></i>
+                <div data-i18n="Quiz Attempts">Quiz Attempts / Results</div>
+            </a>
+        </li>
+
         <!-- Settings -->
         <li class="menu-item {{ request()->segment(2) == 'meta-details' ? 'active open' : '' }} {{ request()->segment(2) == 'currencies' ? 'open' : '' }} {{ request()->segment(2) == 'site-settings' ? 'open' : '' }} {{ request()->segment(2) == 'quiz-settings' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">

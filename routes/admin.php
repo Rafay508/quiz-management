@@ -74,5 +74,9 @@ Route::name('admin.')->group(
         Route::post('questions/import', 'QuestionsController@import')->name('questions.import');
         Route::post('questions/{question}/quick-update', 'QuestionsController@quickUpdate')->name('questions.quick-update');
         Route::resource('questions', 'QuestionsController');
+        
+        // Quiz Attempts / Results Management
+        Route::get('quiz-attempts/export', 'QuizAttemptController@export')->name('quiz-attempts.export');
+        Route::resource('quiz-attempts', 'QuizAttemptController');
     }
 );

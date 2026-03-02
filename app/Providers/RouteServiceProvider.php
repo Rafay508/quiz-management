@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use App\Models\QuizAttempt;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,11 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Explicit route model binding for quiz-attempts
+        Route::bind('quiz-attempt', function ($value) {
+            return QuizAttempt::findOrFail($value);
+        });
+
         $this->mapAdminRoutes();
         $this->mapFrontRoutes(); // front routes should always be in bottom
         $this->mapApiRoutes();

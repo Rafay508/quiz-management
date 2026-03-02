@@ -58,4 +58,70 @@ class QuizAttempt extends Model
     {
         return $this->hasMany(UserAnswer::class);
     }
+
+    /**
+     * Scope a query to filter by status.
+     */
+    public function scopeByStatus($query, $status)
+    {
+        if ($status && $status !== 'all') {
+            return $query->where('status', $status);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter by pass/fail.
+     */
+    public function scopeByPassFail($query, $isPassed)
+    {
+        if ($isPassed !== null && $isPassed !== '') {
+            if ($isPassed === 'passed' || $isPassed === '1' || $isPassed === 1) {
+                return $query->where('is_passed', true);
+            } elseif ($isPassed === 'failed' || $isPassed === '0' || $isPassed === 0) {
+                return $query->where('is_passed', false);
+            }
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter by quiz.
+     */
+    public function scopeByQuiz($query, $quizId)
+    {
+        if ($quizId) {
+            return $query->where('quiz_id', $quizId);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter by date range.
+     */
+    public function scopeByDateRange($query, $startDate, $endDate)
+    {
+        if ($startDate) {
+            $query->whereDate('start_time', '>=', $startDate);
+        }
+        if ($endDate) {
+            $query->whereDate('start_time', '<=', $endDate);
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to search by name, email, or student_id.
+     */
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%')
+                  ->orWhere('student_id', 'like', '%' . $search . '%');
+            });
+        }
+        return $query;
+    }
 }
