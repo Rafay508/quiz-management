@@ -55,20 +55,45 @@ class QuizAttemptController extends Controller
     public function show($attempt_id)
     {
         $attempt = QuizAttempt::find($attempt_id);
-        $quiz = Quiz::find($attempt->quiz_id);
-        $questions = Question::whereQuizId($attempt->quiz_id)
-            ->select('id', 'quiz_id', 'question_text', 'marks')
-            ->with(['options' => function ($query) {
-                $query->select('id', 'question_id', 'option_text');
-            }])
-            ->when($quiz->random_questions_count > 0, function ($query) use ($quiz) {
-                $query->inRandomOrder()
-                      ->limit($quiz->random_questions_count);
-            }, function ($query) {
-                $query->inRandomOrder();
-            })
-            ->get();
+
+        if (!session()->has('quiz') || !session()->has('questions')) {
+            $quiz = Quiz::find($attempt->quiz_id);
+            $questions = Question::whereQuizId($attempt->quiz_id)
+                ->select('id', 'quiz_id', 'question_text', 'marks')
+                ->with(['options' => function ($query) {
+                    $query->select('id', 'question_id', 'option_text');
+                }])
+                ->when($quiz->random_questions_count > 0, function ($query) use ($quiz) {
+                    $query->inRandomOrder()
+                          ->limit($quiz->random_questions_count);
+                }, function ($query) {
+                    $query->inRandomOrder();
+                })
+                ->get();
+
+            session([
+                'quiz' => $quiz,
+                'questions' => $questions,
+            ]);
+        }   
+
+        // Always load from session
+        $quiz = session('quiz');
+        $questions = session('questions');
 
         return view('front.take-quiz', compact('attempt', 'quiz', 'questions'));
+    }
+
+    public function submit(Request $request, $attempt_id)
+    {
+        $request->validate([
+            'answers' => 'required|array',
+        ]);
+
+        echo "<pre>";
+        print_r($request->toArray());
+        print_r('Attempt Id: ' . $attempt_id);
+        echo "</pre>";
+        die();
     }
 }

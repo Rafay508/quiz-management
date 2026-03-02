@@ -32,9 +32,7 @@
   }
 
   .quiz-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    text-align: right;
   }
 
   .quiz-timer {
@@ -69,51 +67,44 @@
 
     <!-- Quiz Header -->
     <div class="quiz-header d-lg-flex justify-content-between align-items-center">
-      <h2>Advanced JavaScript Development</h2>
+      <h2>{{ ucfirst($quiz->title) }}</h2>
       <div class="quiz-timer">
-        ⏱ Timer: 30:00
+        ⏱ Timer: {{ $quiz->duration_minutes }}:00
       </div>
     </div>
 
     <!-- Progress Bar -->
-    <div class="mb-3">
+    <!-- <div class="mb-3">
       <small>Question 1 of 5</small>
       <div class="progress">
         <div class="progress-bar bg-success" role="progressbar" style="width: 20%;"></div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- Question Card -->
-    <div class="card quiz-question">
-      <div class="card-body">
-        <h5>What is the correct syntax for a function in JavaScript?</h5>
-        <div class="quiz-options mt-3">
-          <label>
-            <input type="radio" name="question1" value="1">
-            function myFunction() {}
-          </label>
-          <label>
-            <input type="radio" name="question1" value="2">
-            function:myFunction() {}
-          </label>
-          <label>
-            <input type="radio" name="question1" value="3">
-            function = myFunction() {}
-          </label>
-          <label>
-            <input type="radio" name="question1" value="4">
-            func myFunction() {}
-          </label>
+    <form action="{{ route('quiz.submit', $attempt->id) }}" method="POST">
+      @csrf
+      <!-- Question Card -->
+      <div class="card quiz-question">
+        @foreach ($questions as $key => $question)
+        <div class="card-body">
+          <h5><b>Question {{ $key+1 }}:</b> {{ ucfirst($question->question_text) }}</h5>
+          <div class="quiz-options mt-3">
+            @foreach ($question->options as $option)
+            <label>
+              <input type="radio" name="answers[{{ $question->id }}]" value="{{ $option->id }}">
+                {{ ucfirst($option->option_text) }}
+            </label>
+            @endforeach
+          </div>
         </div>
+        @endforeach
       </div>
-    </div>
 
-    <!-- Navigation Buttons -->
-    <div class="quiz-buttons">
-      <button class="btn btn-secondary">Previous</button>
-      <button class="btn btn-primary">Next</button>
-      <button class="btn btn-success">Submit Quiz</button>
-    </div>
+      <!-- Navigation Buttons -->
+      <div class="quiz-buttons">
+        <button type="submit" class="btn btn-success">Submit Quiz</button>
+      </div>
+    </form>
 
   </div>
 </section>

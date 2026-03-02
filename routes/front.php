@@ -32,6 +32,7 @@ Route::get('quizzes', 'HomeController@quizIndex')->name('quiz.index');
 Route::get('quiz/details/{id}', 'HomeController@quizDetail')->name('quiz.detail');
 Route::post('quiz/attempt/{quiz_id}', 'QuizAttemptController@store')->name('quiz.attempt');
 Route::get('take-quiz/{attempt_id}', 'QuizAttemptController@show')->name('quiz.take');
+Route::post('/quiz/submit/{attempt_id}', 'QuizAttemptController@submit')->name('quiz.submit');
 
 // product by brand
 // Route::get('/brand/{slug}', 'HomeController@productByBrand')->name('product-by.brand');

@@ -27,6 +27,11 @@
   <!-- Main CSS File -->
   <link href="{{ asset('assets/front/css/main.css') }}" rel="stylesheet">
 
+  <!-- BEGIN: Toastr CSS-->
+  <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/vendors/css/extensions/toastr.css') !!}">
+  <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/css/plugins/extensions/toastr.css') !!}">
+  <!-- END: Toastr CSS-->
+
   <!-- =======================================================
   * Template Name: Learner
   * Template URL: https://bootstrapmade.com/learner-bootstrap-course-template/
@@ -63,6 +68,16 @@
 
   <!-- Main JS File -->
   <script src="{{ asset('assets/front/js/main.js') }}"></script>
+
+  <!-- Jquery -->
+  <script src="{!! asset('assets/vendor/libs/jquery/jquery.js') !!}"></script>
+
+  <!-- Toastr -->
+  <script src="{!! asset('assets/admin/app-assets/vendors/js/extensions/toastr.min.js') !!}"></script>
+  <script src="{!! asset('assets/admin/app-assets/js/scripts/extensions/toastr.js') !!}"></script>
+
+  <!-- include errors -->
+  @include('front.partials.errors')
 
 </body>
 
