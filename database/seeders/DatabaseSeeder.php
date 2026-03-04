@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminsTableSeeder::class);
         $this->call(SiteSettingsTableSeeder::class);
         $this->call(QuizTableSeeder::class);
+        $this->call(GradingSchemeSeeder::class);
     }
 }

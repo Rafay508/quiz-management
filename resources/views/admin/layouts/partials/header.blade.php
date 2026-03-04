@@ -95,6 +95,14 @@
             </a>
         </li>
 
+        <!-- Grading Schemes -->
+        <li class="menu-item {{ request()->segment(2) == 'grading-schemes' ? 'active' : '' }}">
+            <a href="{{ route('admin.grading-schemes.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-award"></i>
+                <div data-i18n="Grading Schemes">Grading Schemes</div>
+            </a>
+        </li>
+
         <!-- Settings -->
         <li class="menu-item {{ request()->segment(2) == 'meta-details' ? 'active open' : '' }} {{ request()->segment(2) == 'currencies' ? 'open' : '' }} {{ request()->segment(2) == 'site-settings' ? 'open' : '' }} {{ request()->segment(2) == 'quiz-settings' ? 'open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -107,11 +115,11 @@
                         <div data-i18n="Site Customization">Site Customization</div>
                     </a>
                 </li>
-                <li class="menu-item {{ request()->segment(2) == 'quiz-settings' ? 'active' : '' }}">
+                {{-- <li class="menu-item {{ request()->segment(2) == 'quiz-settings' ? 'active' : '' }}">
                     <a href="{{ route('admin.quiz-settings.index') }}" class="menu-link">
                         <div data-i18n="Quiz Settings">Quiz Settings</div>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </li>
     </ul>

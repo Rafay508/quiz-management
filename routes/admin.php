@@ -78,5 +78,10 @@ Route::name('admin.')->group(
         // Quiz Attempts / Results Management
         Route::get('quiz-attempts/export', 'QuizAttemptController@export')->name('quiz-attempts.export');
         Route::resource('quiz-attempts', 'QuizAttemptController');
+        
+        // Grading Schemes Management (Edit Only)
+        Route::get('grading-schemes', 'GradingSchemeController@index')->name('grading-schemes.index');
+        Route::get('grading-schemes/{grading_scheme}/edit', 'GradingSchemeController@edit')->name('grading-schemes.edit');
+        Route::put('grading-schemes/{grading_scheme}', 'GradingSchemeController@update')->name('grading-schemes.update');
     }
 );
