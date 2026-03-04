@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -31,6 +32,9 @@
   <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/vendors/css/extensions/toastr.css') !!}">
   <link rel="stylesheet" type="text/css" href="{!! asset('assets/admin/app-assets/css/plugins/extensions/toastr.css') !!}">
   <!-- END: Toastr CSS-->
+
+  <!-- sweet alert -->
+  <link rel="stylesheet" href="{!! asset('assets/vendor/libs/sweetalert2/sweetalert2.css') !!}" />
 
   <!-- =======================================================
   * Template Name: Learner
@@ -75,6 +79,10 @@
   <!-- Toastr -->
   <script src="{!! asset('assets/admin/app-assets/vendors/js/extensions/toastr.min.js') !!}"></script>
   <script src="{!! asset('assets/admin/app-assets/js/scripts/extensions/toastr.js') !!}"></script>
+
+  <!-- sweet alert -->
+  <script src="{!! asset('assets/vendor/libs/sweetalert2/sweetalert2.js') !!}"></script>
+  <script src="{!! asset('assets/js/extended-ui-sweetalert2.js') !!}"></script>
 
   <!-- include errors -->
   @include('front.partials.errors')

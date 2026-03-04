@@ -23,6 +23,8 @@ class QuizAttempt extends Model
         'score',
         'percentage',
         'is_passed',
+        'reward_amount',
+        'payment_status',
         'ip_address',
         'user_agent',
     ];
@@ -33,6 +35,7 @@ class QuizAttempt extends Model
         'score' => 'float',
         'percentage' => 'float',
         'is_passed' => 'boolean',
+        'reward_amount' => 'decimal:2',
     ];
 
     /**

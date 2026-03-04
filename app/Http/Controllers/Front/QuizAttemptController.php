@@ -7,6 +7,7 @@ use App\Models\Quiz;
 use App\Models\QuizAttempt;
 use App\Models\Question;
 use App\Models\QuestionOption;
+use App\Models\GradingScheme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -93,63 +94,142 @@ class QuizAttemptController extends Controller
 
     public function submit(Request $request, $attempt_id)
     {
-        $request->validate([
+        // Validate request
+        $validator = Validator::make($request->all(), [
             'answers' => 'required|array',
         ]);
 
-        // Get attempt with quiz
-        $attempt = QuizAttempt::with('quiz.questions.options')
-                    ->findOrFail($attempt_id);
-
-        $quiz = $attempt->quiz;
-        $questions = $quiz->questions;
-
-        $totalQuestions = $questions->count();
-        $marksPerQuestion = $quiz->total_marks / $totalQuestions;
-
-        $score = 0;
-
-        foreach ($questions as $question) {
-
-            $selectedOptionId = $request->input("answers.{$question->id}");
-
-            $correctOption = QuestionOption::where('question_id', $question->id)
-                                ->where('is_correct', 1)
-                                ->first();
-
-            $isCorrect = false;
-            $marksObtained = 0;
-
-            if ($selectedOptionId && $correctOption) {
-                if ($correctOption->id == $selectedOptionId) {
-                    $isCorrect = true;
-                    $marksObtained = $marksPerQuestion;
-                    $score += $marksPerQuestion;
-                }
-            }
-
-            UserAnswer::create([
-                'quiz_attempt_id'   => $attempt_id,
-                'question_id'       => $question->id,
-                'selected_option_id'=> $selectedOptionId,
-                'is_correct'        => $isCorrect,
-                'marks_obtained'    => $marksObtained,
-            ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $validator->errors()
+            ], 422);
         }
 
-        $percentage = ($score / $quiz->total_marks) * 100;
-        $isPassed = $score >= $quiz->pass_marks;
+        try {
+            // Get attempt
+            $attempt = QuizAttempt::findOrFail($attempt_id);
 
-        $attempt->update([
-            'status'          => 'completed',
-            'end_time'        => now(),
-            'score'           => $score,
-            'percentage'      => $percentage,
-            'is_passed'       => $isPassed,
-            'total_questions' => $totalQuestions,
-        ]);
+            // Get questions from session (same as shown in the quiz)
+            if (!session()->has('questions')) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Quiz session expired. Please start the quiz again.',
+                    'errors' => []
+                ], 422);
+            }
 
-        return redirect()->route('quiz.index')
-                         ->with('success', 'Quiz submitted successfully!');
+            $questions = session('questions');
+            $quiz = session('quiz');
+
+            $totalQuestions = $questions->count();
+            
+            // Safety check
+            if ($totalQuestions == 0 || $quiz->total_marks == 0) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid quiz configuration.',
+                    'errors' => []
+                ], 422);
+            }
+            
+            $marksPerQuestion = $quiz->total_marks / $totalQuestions;
+
+            $score = 0;
+            $correct = 0;
+            $wrong = 0;
+            $attempted = 0;
+
+            // Process each question
+            foreach ($questions as $question) {
+                $selectedOptionId = $request->input("answers.{$question->id}");
+
+                // Count attempted questions
+                if ($selectedOptionId) {
+                    $attempted++;
+                }
+
+                $correctOption = QuestionOption::where('question_id', $question->id)
+                                    ->where('is_correct', 1)
+                                    ->first();
+
+                $isCorrect = false;
+                $marksObtained = 0;
+
+                if ($selectedOptionId && $correctOption) {
+                    if ($correctOption->id == $selectedOptionId) {
+                        $isCorrect = true;
+                        $marksObtained = $marksPerQuestion;
+                        $score += $marksPerQuestion;
+                        $correct++;
+                    } else {
+                        $wrong++;
+                    }
+                } else {
+                    // Question not attempted or no correct option found
+                    if ($selectedOptionId) {
+                        $wrong++;
+                    }
+                }
+
+                // Save user answer
+                UserAnswer::create([
+                    'quiz_attempt_id'   => $attempt_id,
+                    'question_id'       => $question->id,
+                    'selected_option_id'=> $selectedOptionId,
+                    'is_correct'        => $isCorrect,
+                    'marks_obtained'    => $marksObtained,
+                ]);
+            }
+
+            // Calculate percentage
+            $percentage = $quiz->total_marks > 0 ? ($score / $quiz->total_marks) * 100 : 0;
+            $isPassed = $score >= $quiz->pass_marks;
+
+            // Get reward based on percentage from grading scheme
+            $rewardAmount = 0;
+            $gradingScheme = GradingScheme::active()
+                ->where('min_percentage', '<=', $percentage)
+                ->where('max_percentage', '>=', $percentage)
+                ->first();
+
+            if ($gradingScheme) {
+                $rewardAmount = $gradingScheme->reward_amount;
+            }
+
+            // Update attempt with all data
+            $attempt->update([
+                'status'          => 'completed',
+                'end_time'        => now(),
+                'score'           => $score,
+                'percentage'      => $percentage,
+                'is_passed'       => $isPassed,
+                'total_questions' => $totalQuestions,
+                'reward_amount'   => $rewardAmount,
+                'payment_status'  => 'pending',
+            ]);
+
+            // Return success JSON response
+            return response()->json([
+                'status' => 'success',
+                'data' => [
+                    'total_questions' => $totalQuestions,
+                    'attempted' => $attempted,
+                    'correct' => $correct,
+                    'wrong' => $wrong,
+                    'score' => round($score, 2),
+                    'percentage' => round($percentage, 2),
+                    'reward' => round($rewardAmount, 2),
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while submitting the quiz.',
+                'errors' => []
+            ], 500);
+        }
     }
 }
