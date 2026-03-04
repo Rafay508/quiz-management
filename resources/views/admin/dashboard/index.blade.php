@@ -54,19 +54,6 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-icon">
-                                <span class="badge bg-label-warning rounded-pill p-2">
-                                    <i class="ti ti-users ti-sm"></i>
-                                </span>
-                            </div>
-                            <h5 class="card-title mb-0 mt-2">{{ $totalUsers }}</h5>
-                            <small class="text-muted">Total Users</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-icon">
                                 <span class="badge bg-label-danger rounded-pill p-2">
                                     <i class="ti ti-clock ti-sm"></i>
                                 </span>
@@ -132,24 +119,10 @@
                 </div>
             </div>
 
-            <!-- User Registrations Chart -->
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">User Registrations (Last 7 Days)</h5>
-                        </div>
-                        <div class="card-body">
-                            <div id="userRegistrationsChart"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Recent Activities -->
-            {{-- <div class="row mb-4">
+            <div class="row mb-4">
                 <!-- Latest Quiz Attempts -->
-                <div class="col-lg-6 mb-4">
+                <div class="col-lg-12 mb-4">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h5 class="mb-0">Latest Quiz Attempts</h5>
@@ -191,46 +164,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Recent User Registrations -->
-                <div class="col-lg-6 mb-4">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between align-items-center">
-                            <h5 class="mb-0">Recent User Registrations</h5>
-                            <a href="{{ route('admin.users.index') }}" class="btn btn-sm btn-label-secondary">View All</a>
-                        </div>
-                        <div class="card-datatable text-nowrap">
-                            <table class="dt-scrollableTable table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Registration Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($recentUsers as $user)
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->created_at->format('M d, Y') }}</td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3" class="text-center">No users found</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
+            </div>
         </div>
         <!-- / Content -->
         @include('admin.layouts.partials.footer')

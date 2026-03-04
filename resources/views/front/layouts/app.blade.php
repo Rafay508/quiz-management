@@ -49,13 +49,16 @@
 
 <body class="index-page">
 
-  @include('front.layouts.partials.header')
-
+  @if (!Route::is('quiz.take'))
+    @include('front.layouts.partials.header')
+  @endif
   <main class="main">
     @yield('content')
   </main>
 
-  @include('front.layouts.partials.footer')
+  @if (!Route::is('quiz.take'))
+    @include('front.layouts.partials.footer')
+  @endif
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
