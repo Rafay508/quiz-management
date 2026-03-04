@@ -151,6 +151,7 @@
     .full-width {
         grid-column: span 2;
     }
+
 </style>
 @endsection
 
@@ -372,6 +373,7 @@
             var submitBtnLoader = $('#submit-btn-loader');
             var timerInterval;
             var isSubmitted = false;
+            var isSubmitting = false;
 
             // Format seconds to MM:SS
             function formatTime(seconds) {
@@ -390,8 +392,7 @@
                     timerDisplay.text('00:00');
                     timerDisplay.css('color', '#dc3545');
                     
-                    if (!isSubmitted) {
-                        isSubmitted = true;
+                    if (!isSubmitted && !isSubmitting) {
                         clearInterval(timerInterval);
                         
                         // Show warning message
@@ -405,8 +406,6 @@
                         setTimeout(function() {
                             submitQuizForm();
                         }, 1000);
-
-                        console.log('end function!');
                     }
                     return;
                 }
@@ -430,9 +429,11 @@
 
             // AJAX Form Submission
             function submitQuizForm() {
-                if (isSubmitted) {
+                if (isSubmitted || isSubmitting) {
                     return;
                 }
+
+                isSubmitting = true;
 
                 // Disable submit button and show loader
                 submitBtn.prop('disabled', true);
@@ -454,6 +455,7 @@
                     dataType: 'json',
                     success: function(response) {
                         isSubmitted = true;
+                        isSubmitting = false;
                         clearInterval(timerInterval);
 
                         if (response.status === 'success') {
@@ -504,6 +506,7 @@
                     },
                     error: function(xhr) {
                         isSubmitted = false;
+                        isSubmitting = false;
                         
                         // Re-enable submit button
                         submitBtn.prop('disabled', false);
@@ -572,8 +575,7 @@
                 var now = new Date();
                 var diff = Math.floor((endTime - now) / 1000);
                 
-                if (diff <= 0 && !isSubmitted) {
-                    isSubmitted = true;
+                if (diff <= 0 && !isSubmitted && !isSubmitting) {
                     clearInterval(timerInterval);
                     toastr.warning('Time is up! Your quiz will be submitted automatically.', 'Time Up!', {
                         "showMethod": "slideDown",
@@ -586,7 +588,7 @@
                     return false;
                 }
 
-                if (!isSubmitted) {
+                if (!isSubmitted && !isSubmitting) {
                     // Confirm submission
                     Swal.fire({
                         title: 'Are you sure?',
