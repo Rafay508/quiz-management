@@ -62,6 +62,10 @@ class QuizAttemptController extends Controller
         $attempt = QuizAttempt::find($attempt_id);
         $sessionQuiz = session('quiz');
 
+        if ($attempt->status == 'completed' || $attempt->status == 'abandoned') {
+            return redirect()->route('home')->with('error', 'You cannot access this page because the attempt is completed.');
+        }
+
         if (
             !$sessionQuiz ||
             $sessionQuiz->id != $attempt->quiz_id ||
