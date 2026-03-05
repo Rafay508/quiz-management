@@ -48,6 +48,9 @@ class QuizAttemptController extends Controller
             'user_agent' => $request->userAgent(),
         ]);
 
+        // clear old quiz session
+        session()->forget(['quiz', 'questions']);
+
         return redirect()->route('quiz.take', $attempt->id);
     }
 
@@ -57,8 +60,13 @@ class QuizAttemptController extends Controller
     public function show($attempt_id)
     {
         $attempt = QuizAttempt::find($attempt_id);
+        $sessionQuiz = session('quiz');
 
-        if (!session()->has('quiz') || !session()->has('questions')) {
+        if (
+            !$sessionQuiz ||
+            $sessionQuiz->id != $attempt->quiz_id ||
+            !session()->has('questions')
+        ) {
             $quiz = Quiz::find($attempt->quiz_id);
             $questions = Question::whereQuizId($attempt->quiz_id)
                 ->select('id', 'quiz_id', 'question_text', 'marks')
@@ -77,9 +85,9 @@ class QuizAttemptController extends Controller
                 'quiz' => $quiz,
                 'questions' => $questions,
             ]);
-        }   
+        }
 
-        // Always load from session
+        // // Always load from session
         $quiz = session('quiz');
         $questions = session('questions');
 
@@ -134,8 +142,11 @@ class QuizAttemptController extends Controller
                 ], 422);
             }
             
+            // marks per question
             $marksPerQuestion = $quiz->total_marks / $totalQuestions;
 
+            // total marks (per questions marks x (multiple to) total questions)
+            $total_marks = $marksPerQuestion * $totalQuestions;
             $score = 0;
             $correct = 0;
             $wrong = 0;
@@ -206,6 +217,7 @@ class QuizAttemptController extends Controller
                 'percentage'      => $percentage,
                 'is_passed'       => $isPassed,
                 'total_questions' => $totalQuestions,
+                'total_marks'     => $quiz->total_marks,
                 'reward_amount'   => $rewardAmount,
                 'payment_status'  => 'pending',
             ]);

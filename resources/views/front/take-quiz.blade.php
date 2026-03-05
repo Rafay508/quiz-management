@@ -192,7 +192,7 @@
           <input type="hidden" name="answers[{{ $question->id }}]" value="">
 
           <div class="quiz-options mt-3">
-            @foreach ($question->options as $option)
+            @foreach ($question->options->shuffle() as $option)
             <label>
               <input type="radio" name="answers[{{ $question->id }}]" value="{{ $option->id }}">
                 {{ ucfirst($option->option_text) }}
