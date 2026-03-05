@@ -286,7 +286,7 @@
 
       <!-- Footer -->
       <div class="modal-footer border-0 px-4 pb-4">
-        <a href="{{ route('home') }}" class="btn btn-primary w-100 rounded-pill py-2 fw-semibold">
+        <a href="{{ route('home') }}" class="btn btn-primary w-100 rounded-pill py-2 fw-semibold allow-leave">
           <i class="bi bi-house-door me-2"></i> Back to Home
         </a>
       </div>
@@ -305,6 +305,23 @@
         }
 
         jQuery(document).ready(function($) {
+
+            // Store beforeunload handler reference so it can be removed
+            var unloadHandler = function (e) {
+                e.preventDefault();
+                e.returnValue = 'Quiz is in progress! Please submit the quiz before leaving.';
+                return 'Quiz is in progress! Please submit the quiz before leaving.';
+            };
+
+            // allow leave on back to home button
+            $('.allow-leave').on('click', function (e) {
+                e.preventDefault();
+                // Remove the beforeunload restriction
+                window.removeEventListener('beforeunload', unloadHandler);
+                // Navigate to home page using JavaScript
+                var homeUrl = $(this).attr('href');
+                window.location.href = homeUrl;
+            });
 
             // Disable F5 / Ctrl+R refresh and common shortcuts
             $(document).on('keydown', function (e) {
@@ -357,11 +374,7 @@
             });
 
             // Warn before window close / refresh with custom message
-            window.addEventListener('beforeunload', function (e) {
-                e.preventDefault();
-                e.returnValue = 'Quiz is in progress! Please submit the quiz before leaving.';
-                return 'Quiz is in progress! Please submit the quiz before leaving.';
-            });
+            window.addEventListener('beforeunload', unloadHandler);
 
             // Timer configuration
             var endTime = new Date('{{ $endTime->toIso8601String() }}');
