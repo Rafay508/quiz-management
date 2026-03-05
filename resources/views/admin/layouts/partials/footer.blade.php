@@ -8,7 +8,7 @@
                 <script>
                     document.write(new Date().getFullYear());
                 </script>
-                 <a href="javascript:;" target="_blank" class="fw-medium">{{ config('app.name', 'Laravel') }}</a> {!! $siteSettings->footer_sentence !!}
+                 <a href="javascript:void(0)" target="_blank" class="fw-medium">{{ ucfirst($siteSettings->site_title) ?? 'QuizMaster' }}</a> | {!! $siteSettings->copyright !!}
             </div>
         </div>
     </div>

@@ -43,8 +43,8 @@
                 </div>
 
                 <div class="hero-buttons">
-                  <a href="#quizzes" class="btn btn-primary">Browse Quizzes</a>
-                  <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+                  <a href="javascript:void(0)" class="btn btn-primary">Browse Quizzes</a>
+                  <a href="javascript:void(0)" class="btn btn-outline">How It Works</a>
                 </div>
 
                 <div class="hero-features">
@@ -148,7 +148,7 @@
                     <span class="level">{{ @$featured_quiz->category->name }}</span>
                     <span class="duration">{{ $featured_quiz->level }}</span>
                   </div>
-                  <h3><a href="#">{{ ucfirst($featured_quiz->title) }}</a></h3>
+                  <h3><a href="javascript:void(0)">{{ ucfirst($featured_quiz->title) }}</a></h3>
                   <p>{{ ucfirst($featured_quiz->description) }}</p>
                   <div class="course-stats">
                     <div class="stat">
@@ -157,7 +157,7 @@
                     </div>
                     <div class="stat">
                       <i class="bi bi-people"></i>
-                      <span>1,245 Participants</span>
+                      <span>{{ number_format($featured_quiz->quiz_attempts_count) }} Participants</span>
                     </div>
                   </div>
                   <a href="{{ route('quiz.detail', $featured_quiz->id) }}" class="btn-course">View Details</a>
@@ -169,15 +169,15 @@
 
         </div>
 
-        <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
+        {{-- <div class="more-courses text-center" data-aos="fade-up" data-aos-delay="500">
           <a href="{{ route('quiz.index') }}" class="btn-more">View All Quizes</a>
-        </div>
+        </div> --}}
 
       </div>
 
     </section><!-- /Featured Quizes Section -->
 
-    <!-- Quiz Categories Section -->
+    {{-- <!-- Quiz Categories Section -->
     <section id="course-categories" class="course-categories section">
 
       <!-- Section Title -->
@@ -374,7 +374,7 @@
 
       </div>
 
-    </section><!-- /Course Categories Section -->
+    </section><!-- /Course Categories Section --> --}}
 
     <!-- Cta Section -->
     <section id="cta" class="cta section light-background">
@@ -408,8 +408,8 @@
               </div>
 
               <div class="cta-actions" data-aos="fade-up" data-aos-delay="500">
-                <a href="quizzes.html" class="btn btn-primary">Browse Quizzes</a>
-                <a href="start-quiz.html" class="btn btn-outline">Start Quiz</a>
+                <a href="javascript:void(0)" class="btn btn-primary">Browse Quizzes</a>
+                <a href="javascript:void(0)" class="btn btn-outline">Start Quiz</a>
               </div>
 
               <div class="stats-row" data-aos="fade-up" data-aos-delay="400">
