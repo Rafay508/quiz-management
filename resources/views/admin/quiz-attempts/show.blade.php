@@ -78,6 +78,11 @@
                             <h5 class="mb-0">Quiz Results</h5>
                         </div>
                         <div class="card-body">
+                            @php
+                                $attemptedQuestions = $quizAttempt->userAnswers->count();
+                                $correctAnswers = $quizAttempt->userAnswers->where('is_correct', true)->count();
+                                $wrongAnswers = $quizAttempt->userAnswers->where('is_correct', false)->count();
+                            @endphp
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Quiz Title:</label>
@@ -96,16 +101,34 @@
                                     </p>
                                 </div>
                                 <div class="col-md-3 mb-3">
-                                    <label class="form-label fw-bold">Total Questions:</label>
-                                    <p class="mb-0">{{ $quizAttempt->total_questions ?? '0' }}</p>
-                                </div>
-                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Total Marks:</label>
                                     <p class="mb-0">{{ $quizAttempt->total_marks ?? '0' }}</p>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Obtained Marks:</label>
                                     <p class="mb-0">{{ $quizAttempt->score ?? '0' }}</p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label fw-bold">Total Questions:</label>
+                                    <p class="mb-0">{{ $quizAttempt->total_questions ?? '0' }}</p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label fw-bold">Attempted Questions:</label>
+                                    <p class="mb-0">
+                                        <span class="badge bg-label-info">{{ $attemptedQuestions }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label fw-bold">Correct Answers:</label>
+                                    <p class="mb-0">
+                                        <span class="badge bg-label-success">{{ $correctAnswers }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label fw-bold">Wrong Answers:</label>
+                                    <p class="mb-0">
+                                        <span class="badge bg-label-danger">{{ $wrongAnswers }}</span>
+                                    </p>
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Percentage:</label>
@@ -139,31 +162,23 @@
                             <h5 class="mb-0">Question Wise Breakdown</h5>
                         </div>
                         <div class="card-body">
-                            @php
-                                $userAnswersMap = $quizAttempt->userAnswers->keyBy('question_id');
-                            @endphp
-
-                            @forelse($quizAttempt->quiz->questions as $index => $question)
+                            @forelse($quizAttempt->userAnswers as $index => $userAnswer)
                                 @php
-                                    $userAnswer = $userAnswersMap->get($question->id);
+                                    $question = $userAnswer->question;
                                     $correctOption = $question->options->where('is_correct', true)->first();
                                 @endphp
 
-                                <div class="card mb-4 border {{ $userAnswer && $userAnswer->is_correct ? 'border-success' : ($userAnswer && !$userAnswer->is_correct ? 'border-danger' : 'border-secondary') }}">
+                                <div class="card mb-4 border {{ $userAnswer->is_correct ? 'border-success' : 'border-danger' }}">
                                     <div class="card-header">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <h6 class="mb-0">Question {{ $index + 1 }}</h6>
                                             <div>
-                                                @if($userAnswer)
-                                                    @if($userAnswer->is_correct)
-                                                        <span class="badge bg-label-success">Correct</span>
-                                                    @else
-                                                        <span class="badge bg-label-danger">Incorrect</span>
-                                                    @endif
-                                                    <span class="badge bg-label-info ms-2">Marks: {{ $userAnswer->marks_obtained ?? '0' }}</span>
+                                                @if($userAnswer->is_correct)
+                                                    <span class="badge bg-label-success">Correct</span>
                                                 @else
-                                                    <span class="badge bg-label-secondary">Not Answered</span>
+                                                    <span class="badge bg-label-danger">Incorrect</span>
                                                 @endif
+                                                <span class="badge bg-label-info ms-2">Marks: {{ $userAnswer->marks_obtained ?? '0' }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +195,7 @@
                                             @foreach($question->options as $option)
                                                 @php
                                                     $isCorrect = $option->is_correct;
-                                                    $isSelected = $userAnswer && $userAnswer->selected_option_id == $option->id;
+                                                    $isSelected = $userAnswer->selected_option_id == $option->id;
                                                     $isWrongSelection = $isSelected && !$isCorrect;
                                                 @endphp
 
@@ -207,7 +222,7 @@
                                             </div>
                                         @endif
 
-                                        @if($userAnswer && $userAnswer->answer_text)
+                                        @if($userAnswer->answer_text)
                                             <div class="alert alert-secondary mt-3 mb-0">
                                                 <strong>Text Answer:</strong> {{ $userAnswer->answer_text }}
                                             </div>
@@ -216,7 +231,7 @@
                                 </div>
                             @empty
                                 <div class="alert alert-info">
-                                    No questions found for this quiz.
+                                    No questions attempted for this quiz.
                                 </div>
                             @endforelse
                         </div>
